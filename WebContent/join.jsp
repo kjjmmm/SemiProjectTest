@@ -6,11 +6,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link
 	href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic|Nanum+Gothic+Coding&display=swap"
 	rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>	
+	
 <style>
 body {
 	font-family: "Nanum Gothic";
@@ -68,7 +71,7 @@ a:hover {
 
 #zip {
 	display: inline-block;
-	margin-top:20px;
+	margin-top: 20px;
 }
 
 #inputZip {
@@ -78,46 +81,98 @@ a:hover {
 .helper {
 	font-size: 12px;
 }
-#pw_form, #pw_match{
-	font-size:12px;
+
+#pw_form, #pw_match {
+	font-size: 12px;
 }
-#divBtnJoin{
-	text-align:center;
+
+#divBtnJoin {
+	text-align: center;
 }
-#checkPassword{
-	margin-bottom:5px;
+
+#checkPassword {
+	margin-bottom: 5px;
 }
-#inputEmail{
-	display:inline-block;
+
+#inputEmail {
+	display: inline-block;
 }
+
+li {
+	width: 130px;
+}
+
+ul {
+	margin: auto;
+}
+
 </style>
 </head>
 <body>
-	<div class="container">
- 		 <div class="row">
-    		<div id="logo" class="col-lg-1" style="font-family: Georgia, serif; font-weight: bold; font-size: 25px;">
-      			Crowd Funding
-    		</div>
-    		<div id="projects" class="col-lg-1">
-      			
-    		</div>
-    		<div id="projects" class="col-lg-2">
-      			<a href="" class="look_projects" style="color: #777676">프로젝트 둘러보기</a>
-    		</div>
-    		<div id="makeProject" class="col-lg-2">
-      			<a href="" class="upload_project" style="color: #777676">프로젝트 올리기</a>
-    		</div>
-    		<div class="col-lg-4">
-      			
-    		</div>
-    		<div id="login" class="col-lg-1">
-      			<a href="" class="a_login_join" style="color: #777676">로그인</a>
-    		</div>
-    		<div id="join" class="col-lg-1">
-      			<a href="" class="a_login_join" style="color: #777676">회원가입</a>
-    		</div>
-  		</div>
-	</div>
+	<nav class="navbar navbar-expand-lg navbar-light">
+		<a class="navbar-brand" href="#">Walk Together</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNav" aria-controls="navbarNav"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" href="#">소개</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">후원안내</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="#">후원하기</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
+			</ul>
+		</div>
+	</nav>
+
+
+<!-- 	<nav class="navbar navbar-expand-lg navbar-light bg-light"> -->
+<!-- 		<a class="navbar-brand" href="#">Crowd Funding</a> -->
+<!-- 		<button class="navbar-toggler" type="button" data-toggle="collapse" -->
+<!-- 			data-target="#navbarNav" aria-controls="navbarNav" -->
+<!-- 			aria-expanded="false" aria-label="Toggle navigation"> -->
+<!-- 			<span class="navbar-toggler-icon"></span> -->
+<!-- 		</button> -->
+<!-- 		<div class="collapse navbar-collapse" id="navbarNav"> -->
+<!-- 			<ul class="navbar-nav"> -->
+<!-- 				<li class="nav-item"><a class="nav-link" href="#">소개</a></li> -->
+<!-- 				<li class="nav-item"><a class="nav-link" href="#">후원안내</a></li> -->
+<!-- 				<li class="nav-item"><a class="nav-link" href="#">후원하기</a></li> -->
+<!-- 				<li class="nav-item"><a class="nav-link" href="#">로그인</a></li> -->
+<!-- 				<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li> -->
+<!-- 			</ul> -->
+<!-- 		</div> -->
+<!-- 	</nav> -->
+	
+	
+	<!-- 	<div class="container"> -->
+	<!--  		 <div class="row"> -->
+	<!--     		<div id="logo" class="col-lg-1" style="font-family: Georgia, serif; font-weight: bold; font-size: 25px;"> -->
+	<!--       			Crowd Funding -->
+	<!--     		</div> -->
+	<!--     		<div id="projects" class="col-lg-1"> -->
+
+	<!--     		</div> -->
+	<!--     		<div id="projects" class="col-lg-2"> -->
+	<!--       			<a href="" class="look_projects" style="color: #777676">프로젝트 둘러보기</a> -->
+	<!--     		</div> -->
+	<!--     		<div id="makeProject" class="col-lg-2"> -->
+	<!--       			<a href="" class="upload_project" style="color: #777676">프로젝트 올리기</a> -->
+	<!--     		</div> -->
+	<!--     		<div class="col-lg-4"> -->
+
+	<!--     		</div> -->
+	<!--     		<div id="login" class="col-lg-1"> -->
+	<!--       			<a href="" class="a_login_join" style="color: #777676">로그인</a> -->
+	<!--     		</div> -->
+	<!--     		<div id="join" class="col-lg-1"> -->
+	<!--       			<a href="" class="a_login_join" style="color: #777676">회원가입</a> -->
+	<!--     		</div> -->
+	<!--   		</div> -->
+	<!-- 	</div> -->
 	<hr>
 	<form>
 		<div class="wrapper">
@@ -129,36 +184,39 @@ a:hover {
 					placeholder="사용하실 이름" required>
 			</div>
 			<div class="form-group">
-				<input type="email" class="form-control" id="inputEmail" name="email"
-					placeholder="이메일 계정" style="width:70%" required>
+				<input type="email" class="form-control" id="inputEmail"
+					name="email" placeholder="이메일 계정" style="width: 70%" required>
 				<button type="button" id="btnConfirmEmail"
 					class="btn btn-outline-info">인증하기</button>
 			</div>
 			<div id="divPw" class="form-group">
-				<input type="password" class="form-control" id="inputPassword" name="pw"
-					placeholder="비밀번호" required><em class="helper">영문, 숫자, 특수문자
-					(!@#$%^&*+=-)를 조합한 8자 이상</em><p id="pw_form"> </p>
+				<input type="password" class="form-control" id="inputPassword"
+					name="pw" placeholder="비밀번호" required><em class="helper">영문,
+					숫자, 특수문자 (!@#$%^&*+=-)를 조합한 8자 이상</em>
+				<p id="pw_form"></p>
 			</div>
 			<div class="form-group">
 				<input type="password" class="form-control" id="checkPassword"
-					placeholder="비밀번호 확인" required><p id="pw_match"></p>
+					placeholder="비밀번호 확인" required>
+				<p id="pw_match"></p>
 			</div>
 			<div id="zip" class="form-group">
 				<input type="text" id="inputZip" class="form-control" name="zip"
 					style="width: 50%" placeholder="우편번호" readonly>
-				<button type="button" id="search"
-					class="btn btn-outline-info">찾기</button>
+				<button type="button" id="search" class="btn btn-outline-info">찾기</button>
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" id="inputAddress" name="address1"
-					placeholder="주소" readonly>
+				<input type="text" class="form-control" id="inputAddress"
+					name="address1" placeholder="주소" readonly>
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" id="inputAddress2" name="address2"
-					placeholder="상세주소">
+				<input type="text" class="form-control" id="inputAddress2"
+					name="address2" placeholder="상세주소">
 			</div>
 
-			<div id="divBtnJoin"><button type="submit" id="btnJoin" class="btn btn-primary">가입하기</button></div>
+			<div id="divBtnJoin">
+				<button type="submit" id="btnJoin" class="btn btn-primary">가입하기</button>
+			</div>
 		</div>
 	</form>
 
