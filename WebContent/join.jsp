@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -119,7 +120,7 @@ a:hover {
   		</div>
 	</div>
 	<hr>
-	<form>
+	<form action="Join.members">
 		<div class="wrapper">
 			<div class="title">
 				<h3>회원가입</h3>
@@ -142,6 +143,10 @@ a:hover {
 			<div class="form-group">
 				<input type="password" class="form-control" id="checkPassword"
 					placeholder="비밀번호 확인" required><p id="pw_match"></p>
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" id="phone" name="phone"
+					placeholder="전화번호" required>
 			</div>
 			<div id="zip" class="form-group">
 				<input type="text" id="inputZip" class="form-control" name="zip"
