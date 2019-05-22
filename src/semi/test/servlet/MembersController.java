@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import semi.test.dao.MemberDAO;
 import semi.test.dto.MemberDTO;
 
-@WebServlet("/MembersController")
+@WebServlet("*.members")
 public class MembersController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String reqUri = request.getRequestURI();
@@ -36,12 +36,22 @@ public class MembersController extends HttpServlet {
 			try {
 				int result = dao.insertMember(dto);
 				request.setAttribute("result", result);
-				request.getRequestDispatcher("/").forward(request, response);
+				request.getRequestDispatcher("join.jsp").forward(request, response);
 			}catch(Exception e) {
-				
+				e.printStackTrace();
 			}
+		}
+		else if(cmd.equals("/Login.members")) {
+			String email = request.getParameter("email");
+			String pw = request.getParameter("pw");
 			
-			
+			try {
+				boolean result = dao.isLoginOk(email, pw);
+				request.setAttribute("result", result);
+				request.getRequestDispatcher("login.jsp").forward(request, response);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

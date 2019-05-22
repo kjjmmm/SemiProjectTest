@@ -13,33 +13,28 @@ import semi.test.dto.MemberDTO;
 public class MemberDAO {
 	public Connection getConntection() throws Exception {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
-		String url = "jdbc:oracle:thin:@192.168.60.8:1521:xe";
-		String user = "kh";
-		String pw = "kh";
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String user = "semi";
+		String pw = "semi";
 		return DriverManager.getConnection(url, user, pw);
 	}
 	
-	private PreparedStatement pstatForInsertMember(Connection con, MemberDTO dto) throws Exception {
-		String sql = "insert into members values (?,?,?,?,?,?,?,?,default,?,?)";
-		PreparedStatement pstat = con.prepareStatement(sql);
-		pstat.setString(1, dto.getEmail());
-		pstat.setString(2, dto.getPw());
-		pstat.setString(3, dto.getName());
-		pstat.setString(4, dto.getNickname());
-		pstat.setString(5, dto.getPhone());
-		pstat.setString(6, dto.getZipCode());
-		pstat.setString(7, dto.getAddress1());
-		pstat.setString(8, dto.getAddress2());
-		pstat.setString(9, dto.getIpAddress());
-		pstat.setString(10, dto.getAdmin());
-		return pstat;
-	}
-	
 	public int insertMember(MemberDTO dto) throws Exception {
+		String sql = "insert into members values (?,?,?,?,?,?,?,?,default,?,?)";
 		try(
 				Connection con = this.getConntection();
-				PreparedStatement pstat = this.pstatForInsertMember(con, dto);
+				PreparedStatement pstat = con.prepareStatement(sql);
 				){
+			pstat.setString(1, dto.getEmail());
+			pstat.setString(2, dto.getPw());
+			pstat.setString(3, dto.getName());
+			pstat.setString(4, dto.getNickname());
+			pstat.setString(5, dto.getPhone());
+			pstat.setString(6, dto.getZipCode());
+			pstat.setString(7, dto.getAddress1());
+			pstat.setString(8, dto.getAddress2());
+			pstat.setString(9, dto.getIpAddress());
+			pstat.setString(10, dto.getAdmin());
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
@@ -70,6 +65,24 @@ public class MemberDAO {
 				result.add(dto);
 			}
 			return result;
+		}
+	}
+	
+	public PreparedStatement pstatForIsLoginOk(Connection con, String email, String pw) throws Exception {
+		String sql = "select * from members where m_email=? and m_pw=?";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		pstat.setString(1, email);
+		pstat.setString(2, pw);
+		
+		return pstat;
+	}
+	public boolean isLoginOk(String email, String pw) throws Exception {
+		try(
+				Connection con = this.getConntection();
+				PreparedStatement pstat = this.pstatForIsLoginOk(con, email, pw);
+				ResultSet rs = pstat.executeQuery();
+				){
+			return rs.next();
 		}
 	}
 }
