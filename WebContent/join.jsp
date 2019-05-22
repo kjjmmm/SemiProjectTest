@@ -1,0 +1,251 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link
+	href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic|Nanum+Gothic+Coding&display=swap"
+	rel="stylesheet">
+<style>
+body {
+	font-family: "Nanum Gothic";
+	height: 100%;
+}
+
+.wrapper {
+	width: 400px;
+	margin: auto;
+	padding: 40px;
+	border: 1px solid #e4e4e4;
+	border-radius: 5px;
+}
+
+.top_wrapper {
+	display: flex;
+	justify-content: space-between;
+	height: 40px;
+	align-items: center;
+	position: relative;
+	margin: auto;
+}
+
+a {
+	font-weight: bold;
+}
+
+a:hover {
+	color: #000000;
+}
+
+.title {
+	margin-bottom: 40px;
+}
+
+.btn-primary {
+	margin: 20px 0px 20px;
+	background-color: #1ebdd8;
+	border-color: #1ebdd8;
+	color: #FFF;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+	border-color: #28a39f;
+	background-color: #28a39f;
+	color: #FFF;
+}
+
+.btn-primary:active, .btn-primary:visited, .btn-primary:active:focus,
+	.btn-primary:active:hover {
+	border-color: #639d34;
+	background-color: #639d34;
+	color: #FFF;
+}
+
+#zip {
+	display: inline-block;
+	margin-top:20px;
+}
+
+#inputZip {
+	display: inline-block;
+}
+
+.helper {
+	font-size: 12px;
+}
+#pw_form, #pw_match{
+	font-size:12px;
+}
+#divBtnJoin{
+	text-align:center;
+}
+#checkPassword{
+	margin-bottom:5px;
+}
+#inputEmail{
+	display:inline-block;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+ 		 <div class="row">
+    		<div id="logo" class="col-lg-1" style="font-family: Georgia, serif; font-weight: bold; font-size: 25px;">
+      			Crowd Funding
+    		</div>
+    		<div id="projects" class="col-lg-1">
+      			
+    		</div>
+    		<div id="projects" class="col-lg-2">
+      			<a href="" class="look_projects" style="color: #777676">프로젝트 둘러보기</a>
+    		</div>
+    		<div id="makeProject" class="col-lg-2">
+      			<a href="" class="upload_project" style="color: #777676">프로젝트 올리기</a>
+    		</div>
+    		<div class="col-lg-4">
+      			
+    		</div>
+    		<div id="login" class="col-lg-1">
+      			<a href="" class="a_login_join" style="color: #777676">로그인</a>
+    		</div>
+    		<div id="join" class="col-lg-1">
+      			<a href="" class="a_login_join" style="color: #777676">회원가입</a>
+    		</div>
+  		</div>
+	</div>
+	<hr>
+	<form>
+		<div class="wrapper">
+			<div class="title">
+				<h3>회원가입</h3>
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" id="name" name="name"
+					placeholder="사용하실 이름" required>
+			</div>
+			<div class="form-group">
+				<input type="email" class="form-control" id="inputEmail" name="email"
+					placeholder="이메일 계정" style="width:70%" required>
+				<button type="button" id="btnConfirmEmail"
+					class="btn btn-outline-info">인증하기</button>
+			</div>
+			<div id="divPw" class="form-group">
+				<input type="password" class="form-control" id="inputPassword" name="pw"
+					placeholder="비밀번호" required><em class="helper">영문, 숫자, 특수문자
+					(!@#$%^&*+=-)를 조합한 8자 이상</em><p id="pw_form"> </p>
+			</div>
+			<div class="form-group">
+				<input type="password" class="form-control" id="checkPassword"
+					placeholder="비밀번호 확인" required><p id="pw_match"></p>
+			</div>
+			<div id="zip" class="form-group">
+				<input type="text" id="inputZip" class="form-control" name="zip"
+					style="width: 50%" placeholder="우편번호" readonly>
+				<button type="button" id="search"
+					class="btn btn-outline-info">찾기</button>
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" id="inputAddress" name="address1"
+					placeholder="주소" readonly>
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" id="inputAddress2" name="address2"
+					placeholder="상세주소">
+			</div>
+
+			<div id="divBtnJoin"><button type="submit" id="btnJoin" class="btn btn-primary">가입하기</button></div>
+		</div>
+	</form>
+
+
+	<script>
+		document.getElementById("inputPassword").oninput = function() {
+			var inputPw = document.getElementById("inputPassword").value;
+			var regex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/g; // 숫자+영문자+특수문자 조합, 8자리 이상
+			var result = regex.exec(inputPw);
+			if (result == null) {
+				document.getElementById("pw_form").innerHTML = "8자 이상 영문,숫자,특수문자를 사용하세요.";
+				document.getElementById("pw_form").style.color = "red";
+			} else {
+				document.getElementById("pw_form").innerHTML = "";
+			}
+		}
+
+		document.getElementById("checkPassword").oninput = function() {
+			var pw = document.getElementById("inputPassword").value;
+			var pw_chk = document.getElementById("checkPassword").value;
+			if (pw == pw_chk) {
+				document.getElementById("pw_match").innerHTML = "";
+		
+			} else {
+				document.getElementById("pw_match").innerHTML = "비밀번호가 일치하지 않습니다.";
+				document.getElementById("pw_match").style.color = "red";
+			}
+		}
+
+		document.getElementById("search").onclick = searchAddress;
+		// searchAddress 뒤에 () 붙으면 함수 실행, 안 붙으면 주소값
+		//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+		function searchAddress() {
+			new daum.Postcode(
+					{
+						oncomplete : function(data) {
+
+							var roadAddr = data.roadAddress; // 도로명 주소 변수
+							var extraRoadAddr = ''; // 참고 항목 변수
+
+							if (data.bname !== ''
+									&& /[동|로|가]$/g.test(data.bname)) {
+								extraRoadAddr += data.bname;
+							}
+
+							if (data.buildingName !== ''
+									&& data.apartment === 'Y') {
+								extraRoadAddr += (extraRoadAddr !== '' ? ', '
+										+ data.buildingName : data.buildingName);
+							}
+
+							if (extraRoadAddr !== '') {
+								extraRoadAddr = ' (' + extraRoadAddr + ')';
+							}
+
+							// 우편번호와 주소 정보를 해당 필드에 넣는다.
+							document.getElementById('inputZip').value = data.zonecode;
+							document.getElementById("inputAddress").value = roadAddr;
+
+							// 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+							if (roadAddr !== '') {
+								document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+							} else {
+								document.getElementById("sample4_extraAddress").value = '';
+							}
+
+							var guideTextBox = document.getElementById("guide");
+							// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+							if (data.autoRoadAddress) {
+								var expRoadAddr = data.autoRoadAddress
+										+ extraRoadAddr;
+								guideTextBox.innerHTML = '(예상 도로명 주소 : '
+										+ expRoadAddr + ')';
+								guideTextBox.style.display = 'block';
+
+							} else if (data.autoJibunAddress) {
+								var expJibunAddr = data.autoJibunAddress;
+								guideTextBox.innerHTML = '(예상 지번 주소 : '
+										+ expJibunAddr + ')';
+								guideTextBox.style.display = 'block';
+							} else {
+								guideTextBox.innerHTML = '';
+								guideTextBox.style.display = 'none';
+							}
+						}
+					}).open();
+		}
+	</script>
+</body>
+</html>
