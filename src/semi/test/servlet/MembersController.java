@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import semi.test.dao.MemberDAO;
 import semi.test.dto.MemberDTO;
 
 @WebServlet("/MembersController")
@@ -32,7 +33,14 @@ public class MembersController extends HttpServlet {
 			String address2 = request.getParameter("address2");
 			
 			MemberDTO dto = new MemberDTO(email, pw, name, nickname, phone, zipCode, address1, address2, null, request.getRemoteAddr(), "n");
-			int result = dao.insert(dto);
+			try {
+				int result = dao.insertMember(dto);
+				request.setAttribute("result", result);
+				request.getRequestDispatcher("/").forward(request, response);
+			}catch(Exception e) {
+				
+			}
+			
 			
 		}
 	}
