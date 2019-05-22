@@ -125,10 +125,7 @@ a:hover {
 			<div class="title">
 				<h3>회원가입</h3>
 			</div>
-			<div class="form-group">
-				<input type="text" class="form-control" id="name" name="name"
-					placeholder="사용하실 이름" required>
-			</div>
+			
 			<div class="form-group">
 				<input type="email" class="form-control" id="inputEmail" name="email"
 					placeholder="이메일 계정" style="width:70%" required>
@@ -143,6 +140,14 @@ a:hover {
 			<div class="form-group">
 				<input type="password" class="form-control" id="checkPassword"
 					placeholder="비밀번호 확인" required><p id="pw_match"></p>
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" id="name" name="name"
+					placeholder="이름" required>
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" id="nickname" name="nickname"
+					placeholder="사용하실 닉네임" required>
 			</div>
 			<div class="form-group">
 				<input type="text" class="form-control" id="phone" name="phone"

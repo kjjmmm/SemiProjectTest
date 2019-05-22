@@ -1,11 +1,14 @@
 package semi.test.servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import semi.test.dto.MemberDTO;
 
 @WebServlet("/MembersController")
 public class MembersController extends HttpServlet {
@@ -16,18 +19,20 @@ public class MembersController extends HttpServlet {
 		
 		System.out.println(cmd);
 		
-		
+		MemberDAO dao = new MemberDAO();
 		
 		if(cmd.equals("/Join.members")) {
-			String name = request.getParameter("name");
 			String email = request.getParameter("email");
 			String pw = request.getParameter("pw");
+			String name = request.getParameter("name");
+			String nickname = request.getParameter("nickname");
 			String phone = request.getParameter("phone");
-			String zipcode = request.getParameter("zip");
+			String zipCode = request.getParameter("zip");
 			String address1 = request.getParameter("address1");
 			String address2 = request.getParameter("address2");
 			
-			
+			MemberDTO dto = new MemberDTO(email, pw, name, nickname, phone, zipCode, address1, address2, null, request.getRemoteAddr(), "n");
+			int result = dao.insert(dto);
 			
 		}
 	}
