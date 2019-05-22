@@ -64,12 +64,12 @@
 				 */
 				name : '주문명:결제테스트', //결제창에서 보여질 이름 //// 후원명 불러오기
 				amount : $("#amount").val(), // 입력받은 금액
-				buyer_email : 'junhaeyong95@naver.com', // 사용자가 로그인한 email 불러오기
+				buyer_email : '', // 사용자가 로그인한 email 불러오기
 				// 사용자 정보 불러오기
-				buyer_name : '전해용',
+				buyer_name : '',
 				buyer_tel : '010-1234-5678',
-				buyer_addr : '경기도 의정부시 민락동',
-				buyer_postcode : '123-456',
+				buyer_addr : '',
+				buyer_postcode : '',
 				m_redirect_url : ''
 			/*  
 			    모바일 결제시,
