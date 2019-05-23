@@ -6,8 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link
+	href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic|Nanum+Gothic+Coding&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+  src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>	
 <style>
 body {
 	font-family: "Nanum Gothic";
@@ -51,13 +57,36 @@ li {
 	text-align: center;
 	margin-bottom: 20px;
 }
+
+.nav_link {
+	font-family: "Nanum Gothic";
+}
+.btn-primary {
+	margin: 20px 0px 20px;
+	background-color: #1ebdd8;
+	border-color: #1ebdd8;
+	color: #FFF;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+	border-color: #28a39f;
+	background-color: #28a39f;
+	color: #FFF;
+}
+
+.btn-primary:active, .btn-primary:visited, .btn-primary:active:focus,
+	.btn-primary:active:hover {
+	border-color: #639d34;
+	background-color: #639d34;
+	color: #FFF;
+}
 </style>
 </head>
 <body>
 
 	<nav class="navbar navbar-expand-md navbar-light">
 		<div class="logo">
-			<a class="navbar-brand" href="#"><img src="logo.png"
+			<a class="navbar-brand" href="main.jsp"><img src="logo.png"
 				width="150px"></a>
 		</div>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -70,8 +99,8 @@ li {
 				<li class="nav-item"><a class="nav-link" href="#">소개</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">후원안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">후원하기</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
+				<li class="nav-item"><a class="nav-link" href="loginForm.jsp">로그인</a></li>
+				<li class="nav-item"><a class="nav-link" href="joinForm.jsp">회원가입</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -88,31 +117,31 @@ li {
 				<h5 class="card-title">식물인간 아버지를 지키는 소년 레슬러 동호</h5>
 				<p class="card-text">
 					모금기간 <br>2019-05-15 ~ 2019-05-29 <br>
-					<button id="fund">모금현황</button>
+					
 				<div class="wrapper">
 					<div class="progress">
-			<div class="progress-bar" role="progressbar"
-							style="width: ${percentage}%" aria-valuenow="${percentage }"
+						<div id="card1" class="progress-bar" role="progressbar"
+							 aria-valuenow="${percentage }"
 							aria-valuemin="0" aria-valuemax="100"></div>
-		</div>
-	</div>${percentage }
-	%
-				</p>
-				
+					</div>
+				</div><span id="card1_span"></span>
+
+
 			</div>
 			<div class="card-footer">
-				<small class="text-muted">Last updated 3 mins ago</small>
+				<button type="button" class="btn btn-primary">후원하기</button>
+				<small class="text-muted"></small>
 			</div>
 		</div>
 		<div class="card">
-			<img src="..." class="card-img-top" alt="...">
+			<img src="plastic.jpg" class="card-img-top" alt="...">
 			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
+				<h5 class="card-title">환경을 위협하는 플라스틱</h5>
 				<p class="card-text">This card has supporting text below as a
 					natural lead-in to additional content.</p>
 			</div>
 			<div class="card-footer">
-				<small class="text-muted">Last updated 3 mins ago</small>
+				<small class="text-muted"></small>
 			</div>
 		</div>
 		<div class="card">
@@ -125,16 +154,21 @@ li {
 					action.</p>
 			</div>
 			<div class="card-footer">
-				<small class="text-muted">Last updated 3 mins ago</small>
+				<small class="text-muted"></small>
 			</div>
 		</div>
 	</div>
 
 
 	<script>
-		document.getElementById("fund").onclick = function() {
-			location.href = "Fund";
-		}
+		$.ajax({
+			url : "Fund",
+			type : "post",
+			
+		}).done(function(resp) {
+			$("#card1").css("width",resp+"%");
+			$("#card1_span").text(resp+"%");
+		})
 	</script>
 </body>
 </html>
