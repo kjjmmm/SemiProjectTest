@@ -1,18 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 	<script>
 		if(${result} > 0){
-			alert("È¸¿øÀÌ µÇ½Å°É È¯¿µÇÕ´Ï´Ù!!");
+			alert("íšŒì›ì´ ë˜ì‹ ê±¸ í™˜ì˜í•©ë‹ˆë‹¤!!");
 			location.href = "login.jsp";
 		}else{
-			alert("È¸¿ø°¡ÀÔ¿¡ ½ÇÆĞÇß½À´Ï´Ù. ÁË¼ÛÇÕ´Ï´Ù");
+			alert("íšŒì›ê°€ì…ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. ì£„ì†¡í•©ë‹ˆë‹¤");
 			location.href = "main.jsp";
 		}
 	</script>
