@@ -14,6 +14,11 @@ import semi.test.dto.MemberDTO;
 @WebServlet("*.members")
 public class MembersController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		
+		
+		
 		String reqUri = request.getRequestURI();
 		String ctxPath = request.getContextPath();
 		String cmd = reqUri.substring(ctxPath.length());
@@ -36,7 +41,7 @@ public class MembersController extends HttpServlet {
 			try {
 				int result = dao.insertMember(dto);
 				request.setAttribute("result", result);
-				request.getRequestDispatcher("join.jsp").forward(request, response);
+				request.getRequestDispatcher("alertJoin.jsp").forward(request, response);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -47,11 +52,19 @@ public class MembersController extends HttpServlet {
 			
 			try {
 				boolean result = dao.isLoginOk(email, pw);
+				if(result) {
+					request.getSession().setAttribute("loginEmail", email);
+				}
 				request.setAttribute("result", result);
-				request.getRequestDispatcher("login.jsp").forward(request, response);
+				request.getRequestDispatcher("alertLogin.jsp").forward(request, response);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
+		}
+		else if(cmd.equals("/Logout.members")) {
+			request.getSession().invalidate();
+			request.getRequestDispatcher("alertLogout.jsp").forward(request, response);
+
 		}
 	}
 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

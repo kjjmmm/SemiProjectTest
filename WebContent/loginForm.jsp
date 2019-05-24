@@ -131,31 +131,6 @@ li{
 			</ul>
 		</div>
 	</nav>
-
-
-<!-- 	<div class="container"> -->
-<!-- 		<div id="nav" class="row"> -->
-<!-- 			<div id="logo" class="col-lg-2 d-none d-md-block" -->
-<!-- 				style="font-family: Georgia, serif; font-weight: bold; font-size: 20px;"> -->
-<!-- 				Crowd Funding</div> -->
-<!-- 			<div id="projects" class="col-lg-2 d-none d-sm-block"> -->
-<!-- 				<a href="" class="look_projects" style="color: #777676">프로젝트 -->
-<!-- 					둘러보기</a> -->
-<!-- 			</div> -->
-<!-- 			<div id="makeProject" class="col-lg-2 d-none d-sm-block"> -->
-<!-- 				<a href="" class="upload_project" style="color: #777676">프로젝트 -->
-<!-- 					올리기</a> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-lg-4"></div> -->
-<!-- 			<div id="login" class="col-lg-1"> -->
-<!-- 				<a href="" class="a_login_join" style="color: #777676">로그인</a> -->
-<!-- 			</div> -->
-<!-- 			<div id="join" class="col-lg-1"> -->
-<!-- 				<a href="" class="a_login_join" style="color: #777676">회원가입</a> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-
 	<hr>
 	<div class="wrapper">
 		<div class="login_box">
