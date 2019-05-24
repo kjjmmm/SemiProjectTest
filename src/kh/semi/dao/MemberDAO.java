@@ -85,4 +85,5 @@ public class MemberDAO {
 			return rs.next();
 		}
 	}
+	
 }

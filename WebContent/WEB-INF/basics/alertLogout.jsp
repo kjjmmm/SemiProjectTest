@@ -8,13 +8,8 @@
 </head>
 <body>
 	<script>
-		if(${result == "true"}){
-			alert("로그인에 성공했습니다.");
-			location.href = "main.jsp";
-		}else{
-			alert("이메일 또는 비밀번호를 다시 확인해주세요.");
-			location.href = "loginForm.jsp";
-		}
+		alert("로그아웃 되었습니다.");
+		location.href = "Main.members";
 	</script>
 </body>
 </html>

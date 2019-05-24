@@ -131,8 +131,8 @@ li {
 						<li class="nav-item"><a class="nav-link" href="Logout.members">로그아웃</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="nav-item"><a class="nav-link" href="loginForm.jsp">로그인</a></li>
-						<li class="nav-item"><a class="nav-link" href="joinForm.jsp">회원가입</a></li>
+						<li class="nav-item"><a class="nav-link" href="LoginForm.members">로그인</a></li>
+						<li class="nav-item"><a class="nav-link" href="JoinForm.members">회원가입</a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>

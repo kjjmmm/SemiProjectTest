@@ -27,7 +27,13 @@ public class MembersController extends HttpServlet {
 		
 		MemberDAO dao = new MemberDAO();
 		
-		if(cmd.equals("/Join.members")) {
+		if(cmd.equals("/Main.members")) {
+			request.getRequestDispatcher("main.jsp").forward(request, response);
+		}
+		else if(cmd.equals("/JoinForm.members")) {
+			request.getRequestDispatcher("/WEB-INF/basics/joinForm.jsp").forward(request, response);
+		}
+		else if(cmd.equals("/Join.members")) {
 			String email = request.getParameter("email");
 			String pw = request.getParameter("pw");
 			String name = request.getParameter("name");
@@ -41,10 +47,13 @@ public class MembersController extends HttpServlet {
 			try {
 				int result = dao.insertMember(dto);
 				request.setAttribute("result", result);
-				request.getRequestDispatcher("alertJoin.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/basics/alertJoin.jsp").forward(request, response);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
+		}
+		else if(cmd.equals("/LoginForm.members")) {
+			request.getRequestDispatcher("/WEB-INF/basics/loginForm.jsp").forward(request, response);
 		}
 		else if(cmd.equals("/Login.members")) {
 			String email = request.getParameter("email");
@@ -56,14 +65,16 @@ public class MembersController extends HttpServlet {
 					request.getSession().setAttribute("loginEmail", email);
 				}
 				request.setAttribute("result", result);
-				request.getRequestDispatcher("alertLogin.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/basics/alertLogin.jsp").forward(request, response);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
+		}else if(cmd.equals("/LoginForm.members")) {
+			request.getRequestDispatcher("/WEB-INF/basics/loginForm.jsp");
 		}
 		else if(cmd.equals("/Logout.members")) {
 			request.getSession().invalidate();
-			request.getRequestDispatcher("alertLogout.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/basics/alertLogout.jsp").forward(request, response);
 
 		}
 	}

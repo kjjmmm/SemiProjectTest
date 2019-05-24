@@ -15,7 +15,7 @@ public class Fund extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter pw = response.getWriter();
 		double percentage = Math.floor((double)1446000 / 2000000 * 100);
-		System.out.println(percentage);
+//		System.out.println(percentage);
 		
 		pw.print(percentage);
 	}
