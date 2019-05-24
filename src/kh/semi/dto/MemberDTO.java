@@ -1,4 +1,4 @@
-package semi.test.dto;
+package kh.semi.dto;
 
 import java.sql.Timestamp;
 

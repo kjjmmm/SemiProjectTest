@@ -1,20 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<<<<<<< HEAD
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>	
 <link
 	href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic|Nanum+Gothic+Coding&display=swap"
 	rel="stylesheet">
-	
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+  src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>	
 <style>
 body {
 	font-family: "Nanum Gothic";
@@ -102,15 +101,20 @@ a:hover {
 ul{
 	margin:auto;
 }
-
+#navbarNav{
+	
+}
 li{
 	width:130px;
 }
 </style>
 </head>
 <body>
-	<nav class="navbar navbar-expand-md navbar-light">
-		<a class="navbar-brand" href="#">Walk Together</a>
+	<nav class="navbar navbar-expand-lg navbar-light">
+		<div class="logo">
+			<a class="navbar-brand" href="main.jsp"><img src="logo/bridge_logo2.png"
+				width="150px"></a>
+		</div>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -122,51 +126,26 @@ li{
 				<li class="nav-item"><a class="nav-link" href="#">후원안내</a>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="#">후원하기</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
+				<li class="nav-item"><a class="nav-link" href="loginForm.jsp">로그인</a></li>
+				<li class="nav-item"><a class="nav-link" href="joinForm.jsp">회원가입</a></li>
 			</ul>
 		</div>
 	</nav>
-
-
-<!-- 	<div class="container"> -->
-<!-- 		<div id="nav" class="row"> -->
-<!-- 			<div id="logo" class="col-lg-2 d-none d-md-block" -->
-<!-- 				style="font-family: Georgia, serif; font-weight: bold; font-size: 20px;"> -->
-<!-- 				Crowd Funding</div> -->
-<!-- 			<div id="projects" class="col-lg-2 d-none d-sm-block"> -->
-<!-- 				<a href="" class="look_projects" style="color: #777676">��濡����� -->
-<!-- 					���щ낫湲�</a> -->
-<!-- 			</div> -->
-<!-- 			<div id="makeProject" class="col-lg-2 d-none d-sm-block"> -->
-<!-- 				<a href="" class="upload_project" style="color: #777676">��濡����� -->
-<!-- 					�щ━湲�</a> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-lg-4"></div> -->
-<!-- 			<div id="login" class="col-lg-1"> -->
-<!-- 				<a href="" class="a_login_join" style="color: #777676">濡�洹몄��</a> -->
-<!-- 			</div> -->
-<!-- 			<div id="join" class="col-lg-1"> -->
-<!-- 				<a href="" class="a_login_join" style="color: #777676">����媛���</a> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-
 	<hr>
 	<div class="wrapper">
 		<div class="login_box">
 			<div class="title">
 				<h3>로그인</h3>
 			</div>
-			<form action="" method="post">
+			<form action="Login.members" method="post">
 				<div class="form-group">
 					<input type="email" class="form-control" id="exampleInputEmail1"
-						aria-describedby="emailHelp" placeholder="이메일 주소(아이디)">
+						name="email" aria-describedby="emailHelp" placeholder="이메일 주소(아이디)" required>
 				</div>
 				<div class="form-group">
 					<input type="password" class="form-control"
-						id="exampleInputPassword1"
-						placeholder="비밀번호(영문,숫자,특수문자 포함 8자 이상)">
+						id="exampleInputPassword1" name="pw"
+						placeholder="비밀번호 (영문,숫자,특수문자 포함 8자 이상)" required>
 				</div>
 				<div class="save_find">
 					<a href="" class="find_id" style="color: black">아이디·비밀번호 찾기></a>
@@ -175,7 +154,7 @@ li{
 					style="font-size: 18px; font-weight: bold;">로그인</button>
 
 				<div id="toJoin">
-					아직 계정이 없으신가요?&nbsp;&nbsp;&nbsp;<a href="" id="a_join"
+					아직 계정이 없으신가요?&nbsp;&nbsp;&nbsp;<a href="joinForm.jsp" id="a_join"
 						style="color: black">가입하기</a>
 				</div>
 			</form>
@@ -185,18 +164,5 @@ li{
 			</div>
 		</div>
 	</div>
-=======
-</head>
-<body>
-	<script>
-		if(${result == "true"}){
-			alert("로그인에 성공했습니다.");
-			location.href = "main.jsp";
-		}else{
-			alert("이메일 또는 비밀번호를 다시 확인해주세요.");
-			location.href = "loginForm.jsp";
-		}
-	</script>
->>>>>>> 365fde083420d41f6d507f7248857f5b8a73d665
 </body>
 </html>

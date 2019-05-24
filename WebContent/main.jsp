@@ -126,8 +126,15 @@ li {
 				<li class="nav-item"><a class="nav-link" href="#">소개</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">후원안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="">후원 게시판</a></li>
-				<li class="nav-item"><a class="nav-link" href="loginForm.jsp">로그인</a></li>
-				<li class="nav-item"><a class="nav-link" href="joinForm.jsp">회원가입</a></li>
+				<c:choose>
+					<c:when test="${sessionScope.loginEmail != null}">
+						<li class="nav-item"><a class="nav-link" href="Logout.members">로그아웃</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="nav-item"><a class="nav-link" href="loginForm.jsp">로그인</a></li>
+						<li class="nav-item"><a class="nav-link" href="joinForm.jsp">회원가입</a></li>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 		</div>
 	</nav>
@@ -140,15 +147,15 @@ li {
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="hope.png" id="" class="d-block w-100" alt="...">
+                    <img src="photo_image/hope.png" id="" class="d-block w-100" alt="...">
                    
                 </div>
                 <div class="carousel-item">
-                    <img src="hands.png" id="img_carousel" class="d-block w-100" alt="...">
+                    <img src="photo_image/hands.png" id="img_carousel" class="d-block w-100" alt="...">
                   
                 </div>
                 <div class="carousel-item">
-                    <img src="handbyhand.png" id="img_carousel" class="d-block w-100" alt="...">
+                    <img src="photo_image/handbyhand.png" id="img_carousel" class="d-block w-100" alt="...">
                      <div class="text3">
                     	<p>당신의 손길이 필요합니다.</p>
                     </div>
@@ -167,7 +174,7 @@ li {
 
 	<div class="card-deck">
 		<div class="card">
-			<img src="boy wrestler.jpg" class="card-img-top" alt="...">
+			<img src="photo_image/boy wrestler.jpg" class="card-img-top" alt="...">
 			<div class="card-body">
 				<h5 class="card-title">식물인간 아버지를 지키는 소년 레슬러 동호</h5>
 				<p class="card-text">모금기간 <br>2019-05-15 ~ 2019-05-29 <br></p>		
@@ -185,7 +192,7 @@ li {
 			</div>
 		</div>
 		<div class="card">
-			<img src="plastic.jpg" class="card-img-top" alt="...">
+			<img src="photo_image/plastic.jpg" class="card-img-top" alt="...">
 			<div class="card-body">
 				<h5 class="card-title">환경을 위협하는 플라스틱<br></h5>
 				<p class="card-text">모금기간 <br>2019-05-15 ~ 2019-05-29 <br></p>
@@ -203,7 +210,7 @@ li {
 			</div>
 		</div>
 		<div class="card">
-			<img src="전화상담원.jpg" class="card-img-top" alt="...">
+			<img src="photo_image/전화상담원.jpg" class="card-img-top" alt="...">
 			<div class="card-body">
 				<h5 class="card-title">청소년 학교폭력상담원 지원</h5>
 				<p class="card-text">모금기간 <br>2019-05-15 ~ 2019-05-29 <br></p>

@@ -17,7 +17,7 @@ create table members(
     m_ipaddress varchar(20) not null,
     m_admin char(1) check(m_admin in('y', 'n'))
 );
---drop table members;
+drop table members;
 
 select * from members;
 
