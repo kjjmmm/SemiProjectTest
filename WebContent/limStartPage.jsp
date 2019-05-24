@@ -14,7 +14,7 @@
 	</form>
 	
 	<script>
-		document.getElementById("sm").onclick() = function(){
+		document.getElementById("sm").onclick = function(){
 			location.href="LimChart";
 		}
 	
