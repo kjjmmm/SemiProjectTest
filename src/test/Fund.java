@@ -1,6 +1,8 @@
 package test;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,11 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 public class Fund extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		PrintWriter pw = response.getWriter();
 		double percentage = Math.floor((double)1446000 / 2000000 * 100);
 		System.out.println(percentage);
-		request.setAttribute("percentage", percentage);
-		request.getRequestDispatcher("main.jsp").forward(request, response);
+		
+		pw.print(percentage);
 	}
 
 	
