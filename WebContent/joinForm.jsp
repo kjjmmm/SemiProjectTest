@@ -104,7 +104,7 @@ li {
 <body>
 <nav class="navbar navbar-expand-md navbar-light">
 		<div class="logo">
-			<a class="navbar-brand" href="main.jsp"><img src="logo.png"
+			<a class="navbar-brand" href="main.jsp"><img src="logo/bridge_logo2.png"
 				width="150px"></a>
 		</div>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -154,7 +154,7 @@ li {
 			</div>
 			<div class="form-group">
 				<input type="text" class="form-control" id="phone" name="phone"
-					placeholder="전화번호" required>
+					placeholder="전화번호">
 			</div>
 			<div id="zip" class="form-group">
 				<input type="text" id="inputZip" class="form-control" name="zip"

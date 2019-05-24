@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <link
 	href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic|Nanum+Gothic+Coding&display=swap"
 	rel="stylesheet">
@@ -80,13 +81,39 @@ li {
 	background-color: #639d34;
 	color: #FFF;
 }
+.carousel-item{ 
+	
+	height:400px;
+	width:800px;
+    
+}
+.carousel{
+	
+	height:400px;
+	width:800px;
+	margin:auto;
+}
+.card-img-top{
+	height:150px;
+}
+#img_carousel{
+	position:absolute;
+}
+.text3{
+	position:relative;
+	color:white;
+	font-size:30px;
+	top:300px;
+	left:450px;
+}
+
 </style>
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-md navbar-light">
+	<nav class="navbar navbar-expand-md navbar-light navbar-fixed-top">
 		<div class="logo">
-			<a class="navbar-brand" href="main.jsp"><img src="logo.png"
+			<a class="navbar-brand" href="main.jsp"><img src="logo/bridge_logo2.png"
 				width="150px"></a>
 		</div>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -98,16 +125,44 @@ li {
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link" href="#">소개</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">후원안내</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">후원하기</a></li>
+				<li class="nav-item"><a class="nav-link" href="">후원 게시판</a></li>
 				<li class="nav-item"><a class="nav-link" href="loginForm.jsp">로그인</a></li>
 				<li class="nav-item"><a class="nav-link" href="joinForm.jsp">회원가입</a></li>
 			</ul>
 		</div>
 	</nav>
-
-	<div class="hope">
-		<img src="hope.png">
-	</div>
+<!-- 캐러셀 -->
+	      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="hope.png" id="" class="d-block w-100" alt="...">
+                   
+                </div>
+                <div class="carousel-item">
+                    <img src="hands.png" id="img_carousel" class="d-block w-100" alt="...">
+                  
+                </div>
+                <div class="carousel-item">
+                    <img src="handbyhand.png" id="img_carousel" class="d-block w-100" alt="...">
+                     <div class="text3">
+                    	<p>당신의 손길이 필요합니다.</p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
 	<hr>
 
 	<div class="card-deck">
@@ -115,18 +170,14 @@ li {
 			<img src="boy wrestler.jpg" class="card-img-top" alt="...">
 			<div class="card-body">
 				<h5 class="card-title">식물인간 아버지를 지키는 소년 레슬러 동호</h5>
-				<p class="card-text">
-					모금기간 <br>2019-05-15 ~ 2019-05-29 <br>
-					
+				<p class="card-text">모금기간 <br>2019-05-15 ~ 2019-05-29 <br></p>		
 				<div class="wrapper">
 					<div class="progress">
 						<div id="card1" class="progress-bar" role="progressbar"
 							 aria-valuenow="${percentage }"
 							aria-valuemin="0" aria-valuemax="100"></div>
 					</div>
-				</div><span id="card1_span"></span>
-
-
+				</div>
 			</div>
 			<div class="card-footer">
 				<button type="button" class="btn btn-primary">후원하기</button>
@@ -136,24 +187,36 @@ li {
 		<div class="card">
 			<img src="plastic.jpg" class="card-img-top" alt="...">
 			<div class="card-body">
-				<h5 class="card-title">환경을 위협하는 플라스틱</h5>
-				<p class="card-text">This card has supporting text below as a
-					natural lead-in to additional content.</p>
+				<h5 class="card-title">환경을 위협하는 플라스틱<br></h5>
+				<p class="card-text">모금기간 <br>2019-05-15 ~ 2019-05-29 <br></p>
+				<div class="wrapper">
+					<div class="progress">
+						<div id="card1" class="progress-bar" role="progressbar"
+							 aria-valuenow="${percentage }"
+							aria-valuemin="0" aria-valuemax="100"></div>
+					</div>
+				</div>
 			</div>
 			<div class="card-footer">
+				<button type="button" class="btn btn-primary">후원하기</button>
 				<small class="text-muted"></small>
 			</div>
 		</div>
 		<div class="card">
-			<img src="..." class="card-img-top" alt="...">
+			<img src="전화상담원.jpg" class="card-img-top" alt="...">
 			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">This is a wider card with supporting text
-					below as a natural lead-in to additional content. This card has
-					even longer content than the first to show that equal height
-					action.</p>
+				<h5 class="card-title">청소년 학교폭력상담원 지원</h5>
+				<p class="card-text">모금기간 <br>2019-05-15 ~ 2019-05-29 <br></p>
+				<div class="wrapper">
+					<div class="progress">
+						<div id="card1" class="progress-bar" role="progressbar"
+							 aria-valuenow="${percentage }"
+							aria-valuemin="0" aria-valuemax="100"></div>
+					</div>
+				</div>
 			</div>
 			<div class="card-footer">
+				<button type="button" class="btn btn-primary">후원하기</button>
 				<small class="text-muted"></small>
 			</div>
 		</div>
