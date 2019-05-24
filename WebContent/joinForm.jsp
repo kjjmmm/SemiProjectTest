@@ -12,6 +12,7 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic|Nanum+Gothic+Coding&display=swap"
 	rel="stylesheet">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>	
 <style>
 body {
 	font-family: "Nanum Gothic";
@@ -91,34 +92,36 @@ a:hover {
 #inputEmail{
 	display:inline-block;
 }
+ul {
+	margin: auto;
+}
+
+li {
+	width: 130px;
+}
 </style>
 </head>
 <body>
-	<div class="container">
- 		 <div class="row">
-    		<div id="logo" class="col-lg-1" style="font-family: Georgia, serif; font-weight: bold; font-size: 25px;">
-      			Crowd Funding
-    		</div>
-    		<div id="projects" class="col-lg-1">
-      			
-    		</div>
-    		<div id="projects" class="col-lg-2">
-      			<a href="" class="look_projects" style="color: #777676">프로젝트 둘러보기</a>
-    		</div>
-    		<div id="makeProject" class="col-lg-2">
-      			<a href="" class="upload_project" style="color: #777676">프로젝트 올리기</a>
-    		</div>
-    		<div class="col-lg-4">
-      			
-    		</div>
-    		<div id="login" class="col-lg-1">
-      			<a href="" class="a_login_join" style="color: #777676">로그인</a>
-    		</div>
-    		<div id="join" class="col-lg-1">
-      			<a href="" class="a_login_join" style="color: #777676">회원가입</a>
-    		</div>
-  		</div>
-	</div>
+<nav class="navbar navbar-expand-md navbar-light">
+		<div class="logo">
+			<a class="navbar-brand" href="main.jsp"><img src="logo/bridge_logo2.png"
+				width="150px"></a>
+		</div>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNav" aria-gcontrols="navbarNav"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" href="#">소개</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">후원안내</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">후원하기</a></li>
+				<li class="nav-item"><a class="nav-link" href="loginForm.jsp">로그인</a></li>
+				<li class="nav-item"><a class="nav-link" href="joinForm.jsp">회원가입</a></li>
+			</ul>
+		</div>
+	</nav>
 	<hr>
 	<form action="Join.members" method="post">
 		<div class="wrapper">
@@ -147,11 +150,11 @@ a:hover {
 			</div>
 			<div class="form-group">
 				<input type="text" class="form-control" id="nickname" name="nickname"
-					placeholder="사용하실 닉네임" required>
+					placeholder="닉네임" required>
 			</div>
 			<div class="form-group">
 				<input type="text" class="form-control" id="phone" name="phone"
-					placeholder="전화번호" required>
+					placeholder="전화번호">
 			</div>
 			<div id="zip" class="form-group">
 				<input type="text" id="inputZip" class="form-control" name="zip"
