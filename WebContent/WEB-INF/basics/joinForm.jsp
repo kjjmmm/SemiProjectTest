@@ -117,8 +117,8 @@ li {
 				<li class="nav-item"><a class="nav-link" href="#">소개</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">후원안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">후원하기</a></li>
-				<li class="nav-item"><a class="nav-link" href="loginForm.jsp">로그인</a></li>
-				<li class="nav-item"><a class="nav-link" href="joinForm.jsp">회원가입</a></li>
+				<li class="nav-item"><a class="nav-link" href="LoginForm.members">로그인</a></li>
+				<li class="nav-item"><a class="nav-link" href="JoinForm.members">회원가입</a></li>
 			</ul>
 		</div>
 	</nav>
