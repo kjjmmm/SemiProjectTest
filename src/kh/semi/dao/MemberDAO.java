@@ -1,4 +1,4 @@
-package semi.test.dao;
+package kh.semi.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import semi.test.dto.MemberDTO;
+import kh.semi.dto.MemberDTO;
 
 
 public class MemberDAO {

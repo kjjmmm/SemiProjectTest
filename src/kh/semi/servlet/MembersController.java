@@ -1,4 +1,4 @@
-package semi.test.servlet;
+package kh.semi.servlet;
 
 import java.io.IOException;
 
@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.test.dao.MemberDAO;
-import semi.test.dto.MemberDTO;
+import kh.semi.dao.MemberDAO;
+import kh.semi.dto.MemberDTO;
 
 @WebServlet("*.members")
 public class MembersController extends HttpServlet {
