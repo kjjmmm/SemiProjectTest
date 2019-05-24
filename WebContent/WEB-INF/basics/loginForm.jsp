@@ -154,7 +154,7 @@ li{
 					style="font-size: 18px; font-weight: bold;">로그인</button>
 
 				<div id="toJoin">
-					아직 계정이 없으신가요?&nbsp;&nbsp;&nbsp;<a href="joinForm.jsp" id="a_join"
+					아직 계정이 없으신가요?&nbsp;&nbsp;&nbsp;<a href="JoinForm.members" id="a_join"
 						style="color: black">가입하기</a>
 				</div>
 			</form>

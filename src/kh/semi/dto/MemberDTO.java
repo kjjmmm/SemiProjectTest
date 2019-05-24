@@ -6,7 +6,6 @@ public class MemberDTO {
 	private String email;
 	private String pw;
 	private String name;
-	private String nickname;
 	private String phone;
 	private String zipCode;
 	private String address1;
@@ -16,12 +15,11 @@ public class MemberDTO {
 	private String admin;
 	
 	public MemberDTO() {}
-	public MemberDTO(String email, String pw, String name, String nickname, String phone, String zipCode,
+	public MemberDTO(String email, String pw, String name, String phone, String zipCode,
 			String address1, String address2, Timestamp joinDate, String ipAddress, String admin) {
 		this.email = email;
 		this.pw = pw;
 		this.name = name;
-		this.nickname = nickname;
 		this.phone = phone;
 		this.zipCode = zipCode;
 		this.address1 = address1;
@@ -47,12 +45,6 @@ public class MemberDTO {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
 	}
 	public String getPhone() {
 		return phone;
