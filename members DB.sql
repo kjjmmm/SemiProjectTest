@@ -8,7 +8,6 @@ create table members(
     m_email varchar(30) primary key,
     m_pw varchar(100) not null,
     m_name varchar(20) not null,
-    m_nickname varchar(20) not null,
     m_phone varchar(20),
     m_zipcode varchar(20),
     m_address1 varchar(100),
@@ -20,4 +19,5 @@ create table members(
 drop table members;
 
 select * from members;
+commit;
 
