@@ -37,19 +37,22 @@ public class BoardController extends HttpServlet {
 		try {
 			if(cmd.contentEquals("/to_write.board")){
 				request.getRequestDispatcher("/WEB-INF/boards/write_supportme.jsp").forward(request, response);
+				
 			}else if(cmd.equals("/newArticle.board")) {
 				String currentPage = request.getParameter("currentPage");
 				request.setAttribute("currentPage", currentPage);
 				request.getRequestDispatcher("/WEB-INF/boards/writer.jsp").forward(request, response);
+				
 			}else if(cmd.contentEquals("/supportme.board")) {
-				String title = request.getParameter("title");
-				title.replaceAll("<.?script>", "");
-				int goal_amount = Integer.parseInt(request.getParameter("goal_amount"));
-				String end = request.getParameter("end_period");
-				String bank = request.getParameter("bank");
-				bank.replaceAll("<.?script>", "");
-				String account = request.getParameter("account");
-				account.replaceAll("<.?script>", "");
+//				String title = request.getParameter("title");
+//				title.replaceAll("<.?script>", "");
+//				int goal_amount = Integer.parseInt(request.getParameter("goal_amount"));
+//				String end = request.getParameter("end_period");
+//				String bank = request.getParameter("bank");
+//				bank.replaceAll("<.?script>", "");
+//				String account = request.getParameter("account");
+//				account.replaceAll("<.?script>", "");
+				
 	//----------- receiving main photo attached. multipart/form-data		
 				String rootPath = this.getServletContext().getRealPath("/");	
 				String filePath = rootPath + "files";	
@@ -73,7 +76,9 @@ public class BoardController extends HttpServlet {
 						if(fi.getSize()==0) {continue;}
 
 						if(fi.isFormField()) {
-							System.out.println(fi.getFieldName()+ ":" + fi.getString());
+							System.out.println(fi.getFieldName());
+							
+							
 						}else {	
 							//	
 							UfileDTO dto = new UfileDTO();
@@ -96,7 +101,7 @@ public class BoardController extends HttpServlet {
 							}
 							response.setCharacterEncoding("UTF-8");
 							response.getWriter().append("files/"+dto.getFileName());
-							int result = dao.insert(dto);		
+//							int result = dao.insert(dto);		
 
 							try {
 								fi.write(new File(filePath+"/"+tempFileName)); 
