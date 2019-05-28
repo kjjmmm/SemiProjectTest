@@ -34,6 +34,7 @@ public class MembersController extends HttpServlet {
 		else if(cmd.equals("/JoinForm.members")) {
 			request.getRequestDispatcher("/WEB-INF/basics/joinForm.jsp").forward(request, response);
 		}
+
 		else if(cmd.equals("/EmailDuplCheck.members")) {
 			String email = request.getParameter("email");
 			try {
@@ -43,6 +44,7 @@ public class MembersController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
 		else if(cmd.equals("/SendMail.members")) {
 			String email = request.getParameter("email");
 			try {
@@ -52,6 +54,7 @@ public class MembersController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
 		else if(cmd.equals("/Join.members")) {
 			String email = request.getParameter("email");
 			String pw = request.getParameter("pw");
@@ -62,6 +65,7 @@ public class MembersController extends HttpServlet {
 			String address2 = request.getParameter("address2");
 
 			MemberDTO dto = new MemberDTO(email, pw, name, phone, zipCode, address1, address2, null, request.getRemoteAddr(), "n");
+
 			try {
 				int result = dao.insertMember(dto);
 				request.setAttribute("result", result);
@@ -96,6 +100,7 @@ public class MembersController extends HttpServlet {
 
 		}
 	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
