@@ -112,7 +112,7 @@ li {
 			</div>
 			<div class="form-group">
 				<input type="number" class="form-control" id="goal_amount"
-					name="goal_amount" aria-describedby="" placeholder="목표모금액" required>
+					name="goal_amount" aria-describedby="" placeholder="목표모금액" min="10000" max="10000000" required>
 			</div>
 			<div class="form-group">
 				모금 마감날짜를 입력해 주세요.(모금은 후원글이 등록된 시점부터 시작됩니다.) <input type="date"
