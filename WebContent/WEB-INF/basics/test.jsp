@@ -15,6 +15,36 @@
 </head>
 
 <body>
+	<nav class="navbar navbar-expand-md navbar-light navbar-fixed-top">
+		<div class="logo">
+			<a class="navbar-brand" href="main.jsp"><img src="logo/bridge_logo2.png"
+				width="150px"></a>
+		</div>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNav" aria-controls="navbarNav"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" href="#">소개</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">후원안내</a></li>
+				<li class="nav-item"><a class="nav-link" href="to_write.board">후원해 주세요</a></li>
+				<li class="nav-item"><a class="nav-link" href="textList.board?currentPage=1">후원 게시판</a></li>
+
+
+				<c:choose>
+					<c:when test="${sessionScope.loginEmail != null}">
+						<li class="nav-item"><a class="nav-link" href="Logout.members">로그아웃</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="nav-item"><a class="nav-link" href="LoginForm.members">로그인</a></li>
+						<li class="nav-item"><a class="nav-link" href="JoinForm.members">회원가입</a></li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
+		</div>
+	</nav>
 	
 	<form action="">
 	   <select>

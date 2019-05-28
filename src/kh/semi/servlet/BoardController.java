@@ -16,6 +16,8 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import org.apache.commons.io.FileExistsException;
+
 import kh.semi.dao.BoardDAO;
 import kh.semi.dto.BoardDTO;
 import kh.semi.dto.UfileDTO;
@@ -23,6 +25,8 @@ import kh.semi.dto.UfileDTO;
 
 @WebServlet("*.board")
 public class BoardController extends HttpServlet {	
+	private int fileIdNo = 1;
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -33,7 +37,87 @@ public class BoardController extends HttpServlet {
 		String cmd = requestURI.substring(contextPath.length());
 		BoardDAO dao = new BoardDAO();
 		try {
-			if(cmd.equals("/newArticle.board")) { // 글쓰기 페이지로 이동
+			if(cmd.contentEquals("/to_write.board")){
+				request.getRequestDispatcher("/WEB-INF/boards/write_supportme.jsp").forward(request, response);
+				
+			}else if(cmd.equals("/newArticle.board")) {
+				String currentPage = request.getParameter("currentPage");
+				request.setAttribute("currentPage", currentPage);
+				request.getRequestDispatcher("/WEB-INF/boards/writer.jsp").forward(request, response);
+				
+			}else if(cmd.contentEquals("/supportme.board")) {
+//				String title = request.getParameter("title");
+//				title.replaceAll("<.?script>", "");
+//				int goal_amount = Integer.parseInt(request.getParameter("goal_amount"));
+//				String end = request.getParameter("end_period");
+//				String bank = request.getParameter("bank");
+//				bank.replaceAll("<.?script>", "");
+//				String account = request.getParameter("account");
+//				account.replaceAll("<.?script>", "");
+				
+	//----------- receiving main photo attached. multipart/form-data		
+				String rootPath = this.getServletContext().getRealPath("/");	
+				String filePath = rootPath + "files";	
+
+				File uploadPath = new File(filePath);
+				if(!uploadPath.exists()) {
+					uploadPath.mkdir();	
+				}
+
+				System.out.println(rootPath);
+
+				DiskFileItemFactory diskFactory = new DiskFileItemFactory();		
+				diskFactory.setRepository(new File(rootPath + "/WEB-INF/temp"));   
+
+				ServletFileUpload sfu = new ServletFileUpload(diskFactory);
+				sfu.setSizeMax(10 * 1024 * 1024); 
+
+				try {
+					List<FileItem> items = sfu.parseRequest(request);		
+					for(FileItem fi : items) {
+						if(fi.getSize()==0) {continue;}
+
+						if(fi.isFormField()) {
+							System.out.println(fi.getFieldName());
+							
+							
+						}else {	
+							//	
+							UfileDTO dto = new UfileDTO();
+							dto.setOriFileName(fi.getName());
+							//					dto.setFileName(tempFileName);
+							dto.setFileSize(fi.getSize());
+							dto.setFilePath(filePath);
+
+							String tempFileName = null;
+							while(true) {
+								try {
+									long tempTime = System.currentTimeMillis();
+									tempFileName = tempTime+"_"+fi.getName();
+									fi.write(new File(filePath+"/"+tempFileName));
+									dto.setFileName(tempFileName);
+									break;
+								}catch(Exception e) {
+									System.out.println("rename file");
+								}
+							}
+							response.setCharacterEncoding("UTF-8");
+							response.getWriter().append("files/"+dto.getFileName());
+//							int result = dao.insert(dto);		
+
+							try {
+								fi.write(new File(filePath+"/"+tempFileName)); 
+							}catch(FileExistsException f) {
+								fi.write(new File(filePath+"/"+fileIdNo++ +"_"+tempFileName));
+							}
+						}
+					}
+				}catch(Exception e) {
+					e.printStackTrace();
+					response.sendRedirect("error.jsp");
+				}
+				
+			}else if(cmd.equals("/newArticle.board")) { // 글쓰기 페이지로 이동
 				String currentPage = request.getParameter("currentPage");
 				request.setAttribute("currentPage", currentPage);
 				request.getRequestDispatcher("/WEB-INF/boards/writer.jsp").forward(request, response);
@@ -53,11 +137,12 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("result", result);
 				request.getRequestDispatcher("/WEB-INF/boards/insertArticle.jsp").forward(request, response);
 
+
 			}else if(cmd.equals("/uploadImage.board")) { // 사진 파일 업로드
 				SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 				Long currentTime = System.currentTimeMillis();
 				String newDate = sdf.format(currentTime);
-				
+
 				String rootPath = this.getServletContext().getRealPath("/"); // this 대신 request라고 해도 똑같음.
 				String id = (String)request.getSession().getAttribute("loginId");
 				String filePath = rootPath + id + "/" + newDate;
@@ -66,6 +151,7 @@ public class BoardController extends HttpServlet {
 
 				File uploadPath = new File(filePath);
 				if(!uploadPath.exists()) {
+
 					uploadPath.mkdir(); // make directory 폴더를 만들어라.
 				}
 
@@ -88,6 +174,7 @@ public class BoardController extends HttpServlet {
 							try {
 								long tempTime = System.currentTimeMillis();
 								tempFileName = tempTime+"_"+fi.getName();
+
 								fi.write(new File(filePath+"/"+tempFileName)); // 임시 폴더에 있는 파일을 우리가 원하는 경로로 다시 복사해주는 코드
 								dto.setFileName(tempFileName);
 								break;
@@ -122,6 +209,7 @@ public class BoardController extends HttpServlet {
 				request.getSession().setAttribute("flag", "false");
 				
 				
+
 			}else if(cmd.equals("/textList.board")) { // 글목록 페이지로 이동
 				int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 				request.setAttribute("currentPage", currentPage);
@@ -140,6 +228,7 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("result", result);
 				request.getRequestDispatcher("/WEB-INF/boards/readArticle.jsp").forward(request, response);
 
+
 			}else if(cmd.equals("/articleSearch.board")) { // 검색 키워드에 맞춰서 글목록 다시 보여주기
 				String option = request.getParameter("option");
 				String keyword = request.getParameter("keyword");
@@ -148,6 +237,7 @@ public class BoardController extends HttpServlet {
 				int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 				request.setAttribute("currentPage", currentPage);
 				List<BoardDTO> list = dao.selectByKeyword(option, keyword);
+
 				int countArticle = list.size(); // 키워드 검색어로 가져온 글의 개수
 				List<BoardDTO> result = dao.getSubList(currentPage, list, countArticle);
 				List<String> pageNavi = dao.getNaviForKeywordSearch(currentPage, countArticle);

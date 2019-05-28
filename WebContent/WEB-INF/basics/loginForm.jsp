@@ -110,6 +110,7 @@ li{
 </style>
 </head>
 <body>
+
 	<nav class="navbar navbar-expand-lg navbar-light">
 		<div class="logo">
 			<a class="navbar-brand" href="main.jsp"><img src="logo/bridge_logo2.png"
@@ -123,11 +124,25 @@ li{
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link" href="#">소개</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">후원안내</a>
-				</li>
-				<li class="nav-item"><a class="nav-link" href="#">후원하기</a></li>
-				<li class="nav-item"><a class="nav-link" href="LoginForm.members">로그인</a></li>
-				<li class="nav-item"><a class="nav-link" href="JoinForm.members">회원가입</a></li>
+
+				<li class="nav-item"><a class="nav-link" href="#">후원안내</a></li>
+				<li class="nav-item"><a class="nav-link" href="to_write.board">후원해
+						주세요</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="textList.board?currentPage=1">후원 게시판</a></li>
+				<c:choose>
+					<c:when test="${sessionScope.loginEmail != null}">
+						<li class="nav-item"><a class="nav-link"
+							href="Logout.members">로그아웃</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="nav-item"><a class="nav-link"
+							href="LoginForm.members">로그인</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="JoinForm.members">회원가입</a></li>
+					</c:otherwise>
+				</c:choose>
+
 			</ul>
 		</div>
 	</nav>
@@ -154,6 +169,7 @@ li{
 					style="font-size: 18px; font-weight: bold;">로그인</button>
 
 				<div id="toJoin">
+
 					아직 계정이 없으신가요?&nbsp;&nbsp;&nbsp;<a href="JoinForm.members" id="a_join"
 						style="color: black">가입하기</a>
 				</div>

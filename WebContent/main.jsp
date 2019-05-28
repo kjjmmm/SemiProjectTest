@@ -125,7 +125,10 @@ li {
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link" href="#">소개</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">후원안내</a></li>
-				<li class="nav-item"><a class="nav-link" href="">후원 게시판</a></li>
+				<li class="nav-item"><a class="nav-link" href="to_write.board">후원해 주세요</a></li>
+				<li class="nav-item"><a class="nav-link" href="textList.board?currentPage=1">후원 게시판</a></li>
+
+
 				<c:choose>
 					<c:when test="${sessionScope.loginEmail != null}">
 						<li class="nav-item"><a class="nav-link" href="Logout.members">로그아웃</a></li>
@@ -184,7 +187,7 @@ li {
 							 aria-valuenow="${percentage }"
 							aria-valuemin="0" aria-valuemax="100"></div>
 					</div>
-				</div>
+
 			</div>
 			<div class="card-footer">
 				<button type="button" class="btn btn-primary">후원하기</button>
