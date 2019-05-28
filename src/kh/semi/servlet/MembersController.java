@@ -25,19 +25,17 @@ public class MembersController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		PrintWriter printWriter = response.getWriter();
-
 		String reqUri = request.getRequestURI();
 		String ctxPath = request.getContextPath();
 		String cmd = reqUri.substring(ctxPath.length());
-
-		System.out.println(cmd);
-
 		MemberDAO dao = new MemberDAO();
 
 		if (cmd.equals("/Main.members")) {
 			request.getRequestDispatcher("main.jsp").forward(request, response);
+			
 		} else if (cmd.equals("/JoinForm.members")) {
 			request.getRequestDispatcher("/WEB-INF/basics/joinForm.jsp").forward(request, response);
+			
 		} else if (cmd.equals("/EmailDuplCheck.members")) {
 			String email = request.getParameter("email");
 			try {
@@ -46,6 +44,7 @@ public class MembersController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
 		} else if (cmd.equals("/SendMail.members")) {
 			String email = request.getParameter("email");
 			try {
@@ -54,6 +53,7 @@ public class MembersController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
 		} else if (cmd.equals("/Join.members")) {
 			String email = request.getParameter("email");
 			String pw = request.getParameter("pw");
@@ -63,8 +63,7 @@ public class MembersController extends HttpServlet {
 			String address1 = request.getParameter("address1");
 			String address2 = request.getParameter("address2");
 
-			MemberDTO dto = new MemberDTO(email, pw, name, phone, zipCode, address1, address2, null,
-					request.getRemoteAddr(), "n");
+			MemberDTO dto = new MemberDTO(email, pw, name, phone, zipCode, address1, address2, null, request.getRemoteAddr(), "n");
 			try {
 				int result = dao.insertMember(dto);
 				request.setAttribute("result", result);
@@ -72,12 +71,10 @@ public class MembersController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (cmd.equals("/LoginForm.members")) {
-			request.getRequestDispatcher("/WEB-INF/basics/loginForm.jsp").forward(request, response);
+			
 		} else if (cmd.equals("/Login.members")) {
 			String email = request.getParameter("email");
 			String pw = request.getParameter("pw");
-
 			try {
 				boolean result = dao.isLoginOk(email, pw);
 				if (result) {
@@ -88,14 +85,12 @@ public class MembersController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (cmd.equals("/LoginForm.members")) {
-			request.getRequestDispatcher("/WEB-INF/basics/loginForm.jsp");
+			
 		} else if (cmd.equals("/Logout.members")) {
 			request.getSession().invalidate();
 			request.getRequestDispatcher("/WEB-INF/basics/alertLogout.jsp").forward(request, response);
 
 		} else if (cmd.equals("/naverLogin.members")) {
-
 			String clientId = "9fcJ6ehu7V7mEFnBQABz";// 애플리케이션 클라이언트 아이디값";
 			String clientSecret = "otERPitybs";// 애플리케이션 클라이언트 시크릿값";
 			String code = request.getParameter("code");
@@ -129,22 +124,17 @@ public class MembersController extends HttpServlet {
 				}
 				br.close();
 				if (responseCode == 200) {
-
 					String ip = request.getRemoteAddr();
-
 					MemberDTO dto = dao.NaverContentsParse(res.toString(), ip);
 
 					if (dao.isIdExist(dto)) {
-
 						request.getSession().setAttribute("navercontents", dto);
 						request.getRequestDispatcher("main.jsp").forward(request, response);
-
 					} else {
 						dao.insertNaverMember(dto);
 						request.getSession().setAttribute("navercontents", dto);
 						request.getRequestDispatcher("main.jsp").forward(request, response);
 					}
-
 				}
 			} catch (Exception e) {
 				System.out.println(e);
