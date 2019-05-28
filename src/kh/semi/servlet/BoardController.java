@@ -39,7 +39,7 @@ public class BoardController extends HttpServlet {
 		try {
 			if(cmd.contentEquals("/write.board")) {
 				request.getRequestDispatcher("/WEB-INF/boards/writer.jsp").forward(request, response);
-			}else if(cmd.contentEquals("/supportme.board")) {
+			}else if(cmd.contentEquals("/supportMe.board")) {
 				//				String title = request.getParameter("title");
 				//				title.replaceAll("<.?script>", "");
 				//				int goal_amount = Integer.parseInt(request.getParameter("goal_amount"));

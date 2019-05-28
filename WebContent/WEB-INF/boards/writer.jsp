@@ -78,13 +78,12 @@ li {
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link" href="#">소개</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">후원안내</a></li>
-				<li class="nav-item"><a class="nav-link" href="supportme.board">후원해
+				<li class="nav-item"><a class="nav-link" href="write.board">후원해
 						주세요</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="textList.board?currentPage=1">후원 게시판</a></li>
 				<c:choose>
-					<c:when test="${sessionScope.loginEmail != null}">
+					<c:when test="${sessionScope.loginEmail != null || navercontents.name != null}">
 						<li class="nav-item"><a class="nav-link"
 							href="Logout.members">로그아웃</a></li>
 					</c:when>
@@ -100,7 +99,7 @@ li {
 	</nav>
 	<hr>
 	<div id="wrapper">
-		<form action="supportme.board" method="post" id="all"
+		<form action="supportMe.board" method="post" id="all"
 			enctype="multipart/form-data">
 			<div class="form-group">
 				후원 게시판에 표시될 사진 파일을 첨부해 주세요. <input type="file" class="photo"

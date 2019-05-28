@@ -45,12 +45,6 @@ ul {
 li {
 	width: 130px;
 }
-
-.card-deck {
-	width: 900px;
-	margin: auto;
-}
-
 .hope {
 	text-align: center;
 	margin-bottom: 20px;
@@ -80,10 +74,6 @@ li {
 	margin: auto;
 }
 
-.card-img-top {
-	height: 150px;
-}
-
 
 .text3 {
 	position: relative;
@@ -96,7 +86,16 @@ li {
 	max-height: 730px;
 	object-fit: cover;
 }
-
+.card-deck{
+	width:1100px;
+	margin:auto;
+}
+.card-img-top{
+	height:207px;
+}
+.forBtnDonate{
+	text-align:center;
+}
 </style>
 </head>
 <body>
@@ -175,31 +174,29 @@ li {
 			<img src="photo_image/boy wrestler.jpg" class="card-img-top"alt="...">
 			<div class="card-body">
 				<h5 class="card-title">식물인간 아버지를 지키는 소년 레슬러 동호</h5>
-				<p class="card-text">
-					모금기간 <br>2019-05-15 ~ 2019-05-29 <br>
-				</p>
-				<div class="wrapper">
-					<div class="progress">
-						<div id="card1" class="progress-bar" role="progressbar"
+			</div>
+			<div class="card-footer">
+					<div class="wrapper">
+						<p class="card-text">모금기간 <br>2019-05-15 ~ 2019-05-29 <br></p>
+						<div class="progress">
+							<div id="card1" class="progress-bar" role="progressbar"
 							aria-valuenow="${percentage }" aria-valuemin="0"
 							aria-valuemax="100">
+							</div>${percentage }%
 						</div>
-					</div>${percentage }%
-				</div>
-				<div class="card-footer">
-					<button type="button" class="btn btn-primary">후원하기</button>
+					</div>
+					<div class="forBtnDonate"><button type="button" class="btn btn-primary">후원하기</button></div>
 					<small class="text-muted"></small>
-				</div>
-			</div>
+			</div>	
 		</div>
 		<div class="card">
 			<img src="photo_image/plastic.jpg" class="card-img-top" alt="...">
 			<div class="card-body">
-				<h5 class="card-title">환경을 위협하는 플라스틱<br></h5>
-				<p class="card-text">
-					모금기간 <br>2019-05-15 ~ 2019-05-29 <br>
-				</p>
+				<h5 class="card-title">환경을 위협하는 플라스틱<br></h5>		
+			</div>
+			<div class="card-footer">
 				<div class="wrapper">
+					<p class="card-text">모금기간 <br>2019-05-15 ~ 2019-05-29 <br></p>
 					<div class="progress">
 						<div id="card1" class="progress-bar" role="progressbar"
 							aria-valuenow="${percentage }" aria-valuemin="0"
@@ -207,9 +204,7 @@ li {
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="card-footer">
-				<button type="button" class="btn btn-primary">후원하기</button>
+				<div class="forBtnDonate"><button type="button" class="btn btn-primary">후원하기</button></div>
 				<small class="text-muted"></small>
 			</div>
 		</div>
@@ -217,10 +212,10 @@ li {
 			<img src="photo_image/전화상담원.jpg" class="card-img-top" alt="...">
 			<div class="card-body">
 				<h5 class="card-title">청소년 학교폭력상담원 지원</h5>
-				<p class="card-text">
-					모금기간 <br>2019-05-15 ~ 2019-05-29 <br>
-				</p>
+			</div>
+			<div class="card-footer">
 				<div class="wrapper">
+					<p class="card-text">모금기간 <br>2019-05-15 ~ 2019-05-29 <br></p>
 					<div class="progress">
 						<div id="card1" class="progress-bar" role="progressbar"
 							aria-valuenow="${percentage }" aria-valuemin="0"
@@ -228,9 +223,7 @@ li {
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="card-footer">
-				<button type="button" class="btn btn-primary">후원하기</button>
+				<div class="forBtnDonate"><button type="button" class="btn btn-primary">후원하기</button></div>
 				<small class="text-muted"></small>
 			</div>
 		</div>

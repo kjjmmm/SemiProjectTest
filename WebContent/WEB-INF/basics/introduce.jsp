@@ -66,8 +66,7 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link" href="Introduce.members">소개</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">후원안내</a></li>
-					<li class="nav-item"><a class="nav-link" href="to_write.board">후원해 주세요</a></li>
+					<li class="nav-item"><a class="nav-link" href="write.board">후원해 주세요</a></li>
 					<li class="nav-item"><a class="nav-link" href="textList.board?currentPage=1">후원 게시판</a></li>
 	
 					<c:choose>

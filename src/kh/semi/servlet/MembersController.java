@@ -74,7 +74,8 @@ public class MembersController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
+		}else if(cmd.contentEquals("/LoginForm.members")) {
+			request.getRequestDispatcher("/WEB-INF/basics/loginForm.jsp").forward(request, response);
 		} else if (cmd.equals("/Login.members")) {
 			String email = request.getParameter("email");
 			String pw = request.getParameter("pw");
