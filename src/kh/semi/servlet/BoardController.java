@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 import org.apache.commons.io.FileExistsException;
 
 import kh.semi.dao.BoardDAO;
@@ -24,7 +25,8 @@ import kh.semi.dto.UfileDTO;
 
 @WebServlet("*.board")
 public class BoardController extends HttpServlet {	
-	private static int fileIdNo = 1;
+	private int fileIdNo = 1;
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -115,7 +117,12 @@ public class BoardController extends HttpServlet {
 					response.sendRedirect("error.jsp");
 				}
 				
-			}else if(cmd.equals("/insertArticle.board")) { 
+			}else if(cmd.equals("/newArticle.board")) { // 글쓰기 페이지로 이동
+				String currentPage = request.getParameter("currentPage");
+				request.setAttribute("currentPage", currentPage);
+				request.getRequestDispatcher("/WEB-INF/boards/writer.jsp").forward(request, response);
+
+			}else if(cmd.equals("/insertArticle.board")) { // 글 작성 완료
 				request.getSession().setAttribute("flag", "true");
 				BoardDTO dto = new BoardDTO();
 				String title = request.getParameter("mytitle");
@@ -130,20 +137,22 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("result", result);
 				request.getRequestDispatcher("/WEB-INF/boards/insertArticle.jsp").forward(request, response);
 
-			}else if(cmd.equals("/uploadImage.board")) { //
+
+			}else if(cmd.equals("/uploadImage.board")) { // 사진 파일 업로드
 				SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 				Long currentTime = System.currentTimeMillis();
 				String newDate = sdf.format(currentTime);
-				
-				String rootPath = this.getServletContext().getRealPath("/"); // this ���떊 request�씪怨� �빐�룄 �삊媛숈쓬.
+
+				String rootPath = this.getServletContext().getRealPath("/"); // this 대신 request라고 해도 똑같음.
 				String id = (String)request.getSession().getAttribute("loginId");
 				String filePath = rootPath + id + "/" + newDate;
-				// UUID uuid = UUID.randomUUID(); // �쑀�씪�븳 �떇蹂꾩옄瑜� �깮�꽦�빐二쇰뒗 �겢�옒�뒪 UUID
+				// UUID uuid = UUID.randomUUID(); // 유일한 식별자를 생성해주는 클래스 UUID
 				System.out.println(rootPath);
 
 				File uploadPath = new File(filePath);
 				if(!uploadPath.exists()) {
-					uploadPath.mkdir(); // make directory �뤃�뜑瑜� 留뚮뱾�뼱�씪.
+
+					uploadPath.mkdir(); // make directory 폴더를 만들어라.
 				}
 
 				DiskFileItemFactory diskFactory = new DiskFileItemFactory();
@@ -152,7 +161,7 @@ public class BoardController extends HttpServlet {
 				sfu.setSizeMax(10 * 1024 * 1024);
 
 				try { 
-					List<FileItem> items = sfu.parseRequest( request); 
+					List<FileItem> items = sfu.parseRequest(request); 
 					for(FileItem fi : items) {
 						if(fi.getSize() == 0) {continue;} 
 						UfileDTO dto = new UfileDTO();
@@ -165,11 +174,12 @@ public class BoardController extends HttpServlet {
 							try {
 								long tempTime = System.currentTimeMillis();
 								tempFileName = tempTime+"_"+fi.getName();
-								fi.write(new File(filePath+"/"+tempFileName)); // �엫�떆 �뤃�뜑�뿉 �엳�뒗 �뙆�씪�쓣 �슦由ш� �썝�븯�뒗 寃쎈줈濡� �떎�떆 蹂듭궗�빐二쇰뒗 肄붾뱶
+
+								fi.write(new File(filePath+"/"+tempFileName)); // 임시 폴더에 있는 파일을 우리가 원하는 경로로 다시 복사해주는 코드
 								dto.setFileName(tempFileName);
 								break;
 							}catch(Exception e) {
-								System.out.println("�뙆�씪 �씠由� �옱�꽕�젙.");
+								System.out.println("파일 이름 재설정.");
 							}
 						}
 						pw.append(id + "/" + newDate + "/"+ dto.getFileName());
@@ -199,7 +209,8 @@ public class BoardController extends HttpServlet {
 				request.getSession().setAttribute("flag", "false");
 				
 				
-			}else if(cmd.equals("/textList.board")) { // 湲�紐⑸줉 �럹�씠吏�濡� �씠�룞
+
+			}else if(cmd.equals("/textList.board")) { // 글목록 페이지로 이동
 				int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 				request.setAttribute("currentPage", currentPage);
 				List<String> pageNavi = dao.getNavi(currentPage);
@@ -210,14 +221,15 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("result", result);
 				request.getRequestDispatcher("/WEB-INF/boards/board.jsp").forward(request, response);
 
-			}else if(cmd.equals("/reading.board")) { // 寃뚯떆湲� �븯�굹瑜� 蹂대뒗 �럹�씠吏�濡� �씠�룞
+			}else if(cmd.equals("/reading.board")) { // 게시글 하나를 보는 페이지로 이동
 				int textNum = Integer.parseInt(request.getParameter("textNo"));
 				request.setAttribute("myId", request.getSession().getAttribute("loginId"));
 				BoardDTO result = dao.showArticle(textNum);
 				request.setAttribute("result", result);
 				request.getRequestDispatcher("/WEB-INF/boards/readArticle.jsp").forward(request, response);
 
-			}else if(cmd.equals("/articleSearch.board")) { // 寃��깋 �궎�썙�뱶�뿉 留욎떠�꽌 湲�紐⑸줉 �떎�떆 蹂댁뿬二쇨린
+
+			}else if(cmd.equals("/articleSearch.board")) { // 검색 키워드에 맞춰서 글목록 다시 보여주기
 				String option = request.getParameter("option");
 				String keyword = request.getParameter("keyword");
 				request.setAttribute("option", option);
@@ -225,14 +237,15 @@ public class BoardController extends HttpServlet {
 				int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 				request.setAttribute("currentPage", currentPage);
 				List<BoardDTO> list = dao.selectByKeyword(option, keyword);
-				int countArticle = list.size(); // �궎�썙�뱶 寃��깋�뼱濡� 媛��졇�삩 湲��쓽 媛쒖닔
+
+				int countArticle = list.size(); // 키워드 검색어로 가져온 글의 개수
 				List<BoardDTO> result = dao.getSubList(currentPage, list, countArticle);
 				List<String> pageNavi = dao.getNaviForKeywordSearch(currentPage, countArticle);
 				request.setAttribute("pageNavi", pageNavi);
 				request.setAttribute("result", result);
 				request.getRequestDispatcher("/WEB-INF/boards/boardByKeyword.jsp").forward(request, response);
 
-			}else if(cmd.equals("/readingByKeyword.board")) { // �궎�썙�뱶濡� 寃��깋�맂 紐⑸줉 以� 寃뚯떆湲� �븯�굹瑜� 蹂대뒗 �럹�씠吏�濡� �씠�룞
+			}else if(cmd.equals("/readingByKeyword.board")) { // 키워드로 검색된 목록 중 게시글 하나를 보는 페이지로 이동
 				String option = request.getParameter("option");
 				String keyword = request.getParameter("keyword");
 				request.setAttribute("option", option);
@@ -245,14 +258,14 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("result", result);
 				request.getRequestDispatcher("/WEB-INF/boards/readArticleByKeyword.jsp").forward(request, response);
 
-			}else if(cmd.equals("/editArticle.board")) { // 寃뚯떆湲� �닔�젙�쓣 �쐞�븳 �럹�씠吏�濡� �씠�룞
+			}else if(cmd.equals("/editArticle.board")) { // 게시글 수정을 위한 페이지로 이동
 				int textNo = Integer.parseInt(request.getParameter("textNo"));
 				request.setAttribute("textNo", textNo);
 				BoardDTO result = dao.showArticle(textNo);
 				request.setAttribute("result", result);
 				request.getRequestDispatcher("/WEB-INF/boards/editing.jsp").forward(request, response);
 
-			}else if(cmd.equals("/editedArticle.board")) { // 寃뚯떆湲� �닔�젙�븯湲�
+			}else if(cmd.equals("/editedArticle.board")) { // 게시글 수정하기
 				int textNo = Integer.parseInt(request.getParameter("textNo"));
 				request.setAttribute("textNo", textNo);
 				String title = request.getParameter("mytitle");
@@ -261,7 +274,7 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("result", result);
 				request.getRequestDispatcher("/WEB-INF/boards/editOk.jsp").forward(request, response);
 
-			}else if(cmd.equals("/removeArticle.board")) { // 寃뚯떆湲� �궘�젣
+			}else if(cmd.equals("/removeArticle.board")) { // 게시글 삭제
 				int textNo = Integer.parseInt(request.getParameter("textNo"));
 				request.setAttribute("textNo", textNo);
 				int result = dao.deleteArticle(textNo);

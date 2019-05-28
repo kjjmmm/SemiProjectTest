@@ -80,7 +80,7 @@ a:hover {
 .helper {
 	font-size: 12px;
 }
-#pw_form, #pw_match{
+#pw_form, #pw_match, #emailCheck{
 	font-size:12px;
 }
 #divBtnJoin{
@@ -102,13 +102,14 @@ li {
 </style>
 </head>
 <body>
-	<nav class="navbar navbar-expand-md navbar-light navbar-fixed-top">
+
+<nav class="navbar navbar-expand-md navbar-light">
 		<div class="logo">
-			<a class="navbar-brand" href="main.jsp"><img
-				src="logo/bridge_logo2.png" width="150px"></a>
+			<a class="navbar-brand" href="main.jsp"><img src="logo/bridge_logo2.png"
+				width="150px"></a>
 		</div>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarNav" aria-controls="navbarNav"
+			data-target="#navbarNav" aria-gcontrols="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -132,11 +133,16 @@ li {
 							href="JoinForm.members">회원가입</a></li>
 					</c:otherwise>
 				</c:choose>
+
+				<!-- <li class="nav-item"><a class="nav-link" href="#">후원하기</a></li>
+				<li class="nav-item"><a class="nav-link" href="LoginForm.members">로그인</a></li>
+				<li class="nav-item"><a class="nav-link" href="JoinForm.members">회원가입</a></li> -->
 			</ul>
 		</div>
 	</nav>
 	<hr>
-	<form action="Join.members" method="post">
+
+	<form action="Join.members" id="joinForm" method="post">
 		<div class="wrapper">
 			<div class="title">
 				<h3>회원가입</h3>
@@ -147,6 +153,7 @@ li {
 					placeholder="이메일 계정" style="width:70%" required>
 				<button type="button" id="btnConfirmEmail"
 					class="btn btn-outline-info">인증하기</button>
+				<p id="emailCheck"></p>
 			</div>
 			<div id="divPw" class="form-group">
 				<input type="password" class="form-control" id="inputPassword" name="pw"
@@ -161,10 +168,6 @@ li {
 				<input type="text" class="form-control" id="name" name="name"
 					placeholder="이름" required>
 			</div>
-<!-- 			<div class="form-group"> -->
-<!-- 				<input type="text" class="form-control" id="nickname" name="nickname" -->
-<!-- 					placeholder="닉네임" required> -->
-<!-- 			</div> -->
 			<div class="form-group">
 				<input type="text" class="form-control" id="phone" name="phone"
 					placeholder="전화번호">
@@ -184,12 +187,66 @@ li {
 					placeholder="상세주소">
 			</div>
 
-			<div id="divBtnJoin"><input type="submit" id="btnJoin" class="btn btn-primary" value="가입하기"></div>
+			<div id="divBtnJoin"><input type="button" id="btnJoin" class="btn btn-primary" value="가입하기"></div>
 		</div>
 	</form>
 
 
 	<script>
+		$("#btnJoin").on("click", function(){
+			if($("#inputEmail").val() == ""){
+				alert("이메일을 입력해주세요.");
+			}
+			else if($("#pw_match").text() != ""){
+				alert("비밀번호를 다시 확인해주세요.");
+			}
+			else if($("#name").val() == ""){
+				alert("이름을 입력해주세요.");
+			}
+			else{
+				$.ajax({
+					url: "SendMail.members",
+					type: "post",
+					data: {
+						email: $("#inputEmail").val()
+					}
+				}).done(function(resp){
+					if(resp == 0){
+						alert("이메일 주소가 잘못되었습니다. 다시 입력해주세요.");
+					}
+					else{	// 메일 발송을 성공했을 때
+						var inputNum = prompt("입력하신 이메일로 메일이 발송되었습니다. 확인하신 후 인증번호를 입력해주세요.");
+						if(inputNum == resp){
+							$("#joinForm").submit();
+						}
+						else if(resp){
+							alert("인증번호가 일치하지 않습니다.");
+							location.href = "JoinForm.members";
+						}
+					}
+				});
+			}
+		})
+		
+		$("#inputEmail").on("input", function(){
+			$.ajax({
+				url: "EmailDuplCheck.members",
+				type: "post",
+				data: {
+					email: $("#inputEmail").val()
+				}
+			}).done(function(resp){
+				console.log(resp);
+				if(resp == "false"){
+					$("#emailCheck").css("color", "red");
+					$("#emailCheck").text("이미 가입된 이메일입니다.");
+				}
+				else{
+					$("#emailCheck").text("");
+				}
+			})
+		})
+
 		document.getElementById("inputPassword").oninput = function() {
 			var inputPw = document.getElementById("inputPassword").value;
 			var regex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/g; // 숫자+영문자+특수문자 조합, 8자리 이상

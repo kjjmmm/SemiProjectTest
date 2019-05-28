@@ -110,10 +110,11 @@ li{
 </style>
 </head>
 <body>
-	<nav class="navbar navbar-expand-md navbar-light navbar-fixed-top">
+
+	<nav class="navbar navbar-expand-lg navbar-light">
 		<div class="logo">
-			<a class="navbar-brand" href="main.jsp"><img
-				src="logo/bridge_logo2.png" width="150px"></a>
+			<a class="navbar-brand" href="main.jsp"><img src="logo/bridge_logo2.png"
+				width="150px"></a>
 		</div>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
@@ -123,6 +124,7 @@ li{
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link" href="#">소개</a></li>
+
 				<li class="nav-item"><a class="nav-link" href="#">후원안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="to_write.board">후원해
 						주세요</a></li>
@@ -140,6 +142,7 @@ li{
 							href="JoinForm.members">회원가입</a></li>
 					</c:otherwise>
 				</c:choose>
+
 			</ul>
 		</div>
 	</nav>
@@ -166,7 +169,8 @@ li{
 					style="font-size: 18px; font-weight: bold;">로그인</button>
 
 				<div id="toJoin">
-					아직 계정이 없으신가요?&nbsp;&nbsp;&nbsp;<a href="joinForm.jsp" id="a_join"
+
+					아직 계정이 없으신가요?&nbsp;&nbsp;&nbsp;<a href="JoinForm.members" id="a_join"
 						style="color: black">가입하기</a>
 				</div>
 			</form>
