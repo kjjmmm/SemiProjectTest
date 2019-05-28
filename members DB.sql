@@ -6,7 +6,7 @@ commit;
 
 create table members(
     m_email varchar(30) primary key,
-    m_pw varchar(100) not null,
+    m_pw varchar(100) null,
     m_name varchar(20) not null,
 <<<<<<< HEAD
     m_nickname varchar(20) not null,
