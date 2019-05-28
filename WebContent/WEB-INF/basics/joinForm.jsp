@@ -172,7 +172,6 @@ li {
 		</div>
 	</form>
 
-
 	<script>
 		$("#btnJoin").on("click", function(){
 			if($("#inputEmail").val() == ""){
