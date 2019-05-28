@@ -6,17 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<link
-	href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic|Nanum+Gothic+Coding&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic|Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <style>
 body {
 	font-family: "Nanum Gothic";
@@ -114,7 +108,6 @@ li {
 </style>
 </head>
 <body>
-
 	<nav class="navbar navbar-expand-md navbar-light navbar-fixed-top">
 		<div class="logo">
 			<a class="navbar-brand" href="main.jsp"><img
@@ -131,7 +124,6 @@ li {
 				<li class="nav-item"><a class="nav-link" href="#">후원안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="to_write.board">후원해 주세요</a></li>
 				<li class="nav-item"><a class="nav-link" href="textList.board?currentPage=1">후원 게시판</a></li>
-
 
 				<c:choose>
 					<c:when test="${sessionScope.loginEmail != null || navercontents.name != null}">
@@ -175,21 +167,20 @@ li {
 			</div>
 		</div>
 		<a class="carousel-control-prev" href="#carouselExampleIndicators"
-			role="button" data-slide="prev"> <span
-			class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-			class="sr-only">Previous</span>
-		</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
-			role="button" data-slide="next"> <span
-			class="carousel-control-next-icon" aria-hidden="true"></span> <span
-			class="sr-only">Next</span>
+			role="button" data-slide="prev"> 
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span> 
+			<span class="sr-only">Previous</span>
+		</a> 
+			<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next"> 
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
 		</a>
 	</div>
 	<hr>
 
 	<div class="card-deck">
 		<div class="card">
-			<img src="photo_image/boy wrestler.jpg" class="card-img-top"
-				alt="...">
+			<img src="photo_image/boy wrestler.jpg" class="card-img-top"alt="...">
 			<div class="card-body">
 				<h5 class="card-title">식물인간 아버지를 지키는 소년 레슬러 동호</h5>
 				<p class="card-text">
@@ -199,21 +190,20 @@ li {
 					<div class="progress">
 						<div id="card1" class="progress-bar" role="progressbar"
 							aria-valuenow="${percentage }" aria-valuemin="0"
-							aria-valuemax="100"></div>
+							aria-valuemax="100">
+						</div>
 					</div>
-
-			</div>
-			<div class="card-footer">
-				<button type="button" class="btn btn-primary">후원하기</button>
-				<small class="text-muted"></small>
+				</div>
+				<div class="card-footer">
+					<button type="button" class="btn btn-primary">후원하기</button>
+					<small class="text-muted"></small>
+				</div>
 			</div>
 		</div>
 		<div class="card">
 			<img src="photo_image/plastic.jpg" class="card-img-top" alt="...">
 			<div class="card-body">
-				<h5 class="card-title">
-					환경을 위협하는 플라스틱<br>
-				</h5>
+				<h5 class="card-title">환경을 위협하는 플라스틱<br></h5>
 				<p class="card-text">
 					모금기간 <br>2019-05-15 ~ 2019-05-29 <br>
 				</p>
@@ -221,7 +211,8 @@ li {
 					<div class="progress">
 						<div id="card1" class="progress-bar" role="progressbar"
 							aria-valuenow="${percentage }" aria-valuemin="0"
-							aria-valuemax="100"></div>
+							aria-valuemax="100">
+						</div>
 					</div>
 				</div>
 			</div>
@@ -241,7 +232,8 @@ li {
 					<div class="progress">
 						<div id="card1" class="progress-bar" role="progressbar"
 							aria-valuenow="${percentage }" aria-valuemin="0"
-							aria-valuemax="100"></div>
+							aria-valuemax="100">
+						</div>
 					</div>
 				</div>
 			</div>
