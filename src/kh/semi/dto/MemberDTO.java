@@ -15,6 +15,14 @@ public class MemberDTO {
 	private String admin;
 	
 	public MemberDTO() {}
+	
+	public MemberDTO(String email, String name, Timestamp joinDate, String ipAddress, String admin) {
+		this.email = email;
+		this.name = name;
+		this.joinDate = joinDate;
+		this.ipAddress = ipAddress;
+		this.admin = admin;
+	}
 	public MemberDTO(String email, String pw, String name, String phone, String zipCode,
 			String address1, String address2, Timestamp joinDate, String ipAddress, String admin) {
 		this.email = email;

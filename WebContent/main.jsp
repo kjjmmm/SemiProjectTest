@@ -17,9 +17,6 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script type="text/javascript"
-	src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js"
-	charset="utf-8"></script>
 <style>
 body {
 	font-family: "Nanum Gothic";
@@ -134,7 +131,7 @@ li {
 				<li class="nav-item"><a class="nav-link" href="#">후원안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="">후원 게시판</a></li>
 				<c:choose>
-					<c:when test="${sessionScope.loginEmail != null}">
+					<c:when test="${sessionScope.loginEmail != null || navercontents.name != null}">
 						<li class="nav-item"><a class="nav-link"
 							href="Logout.members">로그아웃</a></li>
 					</c:when>
@@ -262,40 +259,16 @@ li {
 			$("#card1").css("width", resp + "%");
 			$("#card1_span").text(resp + "%");
 		})
-
-		//네이버 api-------------------------------------------------------
-		
-		var naverLogin = new naver.LoginWithNaverId({
-			clientId : "9fcJ6ehu7V7mEFnBQABz",
-			callbackUrl : "http://localhost:8080/Project/main.jsp",
-			isPopup : false,
-			callbackHandle : false
-		});
-
-		naverLogin.init();
-
-		naverLogin.getLoginStatus(function(status) {
-			if (status) {
-				var email = naverLogin.user.getEmail();
-				var name = naverLogin.user.getName();
-				var birthday = naverLogin.user.getBirthday();
-				var uniqId = naverLogin.user.getId();
-				var age = naverLogin.user.getAge();
-				var gender = naverLogin.user.getGender();
-
-				console.log(email);
-				console.log(name);
-				console.log(birthday);
-				console.log(age);
-				console.log(gender);
-				console.log(uniqId);
-
-			} else {
-				console.log("AccessToken이 올바르지 않습니다.");
-			}
-		});
-		
-		//------------------------------------------------------------
 	</script>
+	
+	<c:if test="${navercontents.name != null }">
+	
+		<script>
+
+		alert("${navercontents.name}님 반갑습니다 !");
+		
+	</script>
+	
+	</c:if>
 </body>
 </html>
