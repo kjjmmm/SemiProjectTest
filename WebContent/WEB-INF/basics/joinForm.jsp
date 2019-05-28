@@ -102,6 +102,7 @@ li {
 </style>
 </head>
 <body>
+
 <nav class="navbar navbar-expand-md navbar-light">
 		<div class="logo">
 			<a class="navbar-brand" href="main.jsp"><img src="logo/bridge_logo2.png"
@@ -116,13 +117,31 @@ li {
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link" href="#">소개</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">후원안내</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">후원하기</a></li>
+				<li class="nav-item"><a class="nav-link" href="to_write.board">후원해
+						주세요</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="textList.board?currentPage=1">후원 게시판</a></li>
+				<c:choose>
+					<c:when test="${sessionScope.loginEmail != null}">
+						<li class="nav-item"><a class="nav-link"
+							href="Logout.members">로그아웃</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="nav-item"><a class="nav-link"
+							href="LoginForm.members">로그인</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="JoinForm.members">회원가입</a></li>
+					</c:otherwise>
+				</c:choose>
+
+				<!-- <li class="nav-item"><a class="nav-link" href="#">후원하기</a></li>
 				<li class="nav-item"><a class="nav-link" href="LoginForm.members">로그인</a></li>
-				<li class="nav-item"><a class="nav-link" href="JoinForm.members">회원가입</a></li>
+				<li class="nav-item"><a class="nav-link" href="JoinForm.members">회원가입</a></li> -->
 			</ul>
 		</div>
 	</nav>
 	<hr>
+
 	<form action="Join.members" id="joinForm" method="post">
 		<div class="wrapper">
 			<div class="title">
@@ -207,8 +226,8 @@ li {
 					}
 				});
 			}
-			
 		})
+		
 		$("#inputEmail").on("input", function(){
 			$.ajax({
 				url: "EmailDuplCheck.members",
@@ -227,6 +246,7 @@ li {
 				}
 			})
 		})
+
 		document.getElementById("inputPassword").oninput = function() {
 			var inputPw = document.getElementById("inputPassword").value;
 			var regex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/g; // 숫자+영문자+특수문자 조합, 8자리 이상

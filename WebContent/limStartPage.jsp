@@ -7,7 +7,7 @@
 <title>insert</title>
 </head>
 <body>
-	<form action="LimChart" method="post">
+	<form action="/WEB-INF/basics/LimChart" method="post">
 		<input type="text" name="barNum">
 		<input type="text" name="percentNum">
 		<input type="submit" id="sm">

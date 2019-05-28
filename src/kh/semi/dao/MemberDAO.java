@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -152,7 +153,7 @@ public int insertNaverMember(MemberDTO param) throws Exception{
 			pstat.setString(6, dto.getAddress1());
 			pstat.setString(7, dto.getAddress2());
 			pstat.setString(8, dto.getIpAddress());
-			pstat.setString(9, dto.getAdmin());
+			pstat.setString(9, dto.getAdmin());	
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
@@ -193,6 +194,7 @@ public int insertNaverMember(MemberDTO param) throws Exception{
 		
 		return pstat;
 	}
+	
 	public boolean isLoginOk(String email, String pw) throws Exception {
 		try(
 				Connection con = this.getConnection();
@@ -284,20 +286,15 @@ public int insertNaverMember(MemberDTO param) throws Exception{
 }
 
 class MyAuthentication extends Authenticator {
-
+	
 	PasswordAuthentication pa;
-
-
 	public MyAuthentication(){
 
 		String id = "123@gmail.com";       // 구글 ID
 		String pw = "123";          // 구글 비밀번호
-
 		// ID와 비밀번호를 입력한다.
 		pa = new PasswordAuthentication(id, pw);
-
 	}
-
 	// 시스템에서 사용하는 인증정보
 	public PasswordAuthentication getPasswordAuthentication() {
 		return pa;

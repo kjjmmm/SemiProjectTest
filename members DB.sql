@@ -8,6 +8,10 @@ create table members(
     m_email varchar(30) primary key,
     m_pw varchar(100) null,
     m_name varchar(20) not null,
+<<<<<<< HEAD
+    m_nickname varchar(20) not null,
+=======
+>>>>>>> 47849336d9dcf3e22e3994f40fb1b903c5d930b1
     m_phone varchar(20),
     m_zipcode varchar(20),
     m_address1 varchar(100),
@@ -19,5 +23,8 @@ create table members(
 drop table members;
 
 select * from members;
+<<<<<<< HEAD
+=======
 commit;
+>>>>>>> 47849336d9dcf3e22e3994f40fb1b903c5d930b1
 
