@@ -72,13 +72,6 @@ li {
 	color: #FFF;
 }
 
-.btn-primary:active, .btn-primary:visited, .btn-primary:active:focus,
-	.btn-primary:active:hover {
-	border-color: #639d34;
-	background-color: #639d34;
-	color: #FFF;
-}
-
 .carousel-item {
 	height: 400px;
 	width: 800px;
@@ -110,7 +103,7 @@ li {
 <body>
 	<nav class="navbar navbar-expand-md navbar-light navbar-fixed-top">
 		<div class="logo">
-			<a class="navbar-brand" href="main.jsp"><img
+			<a class="navbar-brand" href="Main.members"><img
 				src="logo/bridge_logo2.png" width="150px"></a>
 		</div>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -120,7 +113,7 @@ li {
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="#">소개</a></li>
+				<li class="nav-item"><a class="nav-link" href="Introduce.members">소개</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">후원안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="to_write.board">후원해 주세요</a></li>
 				<li class="nav-item"><a class="nav-link" href="textList.board?currentPage=1">후원 게시판</a></li>
