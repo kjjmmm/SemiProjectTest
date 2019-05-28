@@ -3,7 +3,6 @@ package kh.semi.servlet;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,11 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
 import org.apache.commons.io.FileExistsException;
 
 import kh.semi.dao.BoardDAO;
-import kh.semi.dto.BoardDTO;
 import kh.semi.dto.UfileDTO;
 
 
@@ -40,6 +37,7 @@ public class BoardController extends HttpServlet {
 			if(cmd.contentEquals("/write.board")) {
 				request.getRequestDispatcher("/WEB-INF/boards/writer.jsp").forward(request, response);
 			}else if(cmd.contentEquals("/supportMe.board")) {
+
 				//				String title = request.getParameter("title");
 				//				title.replaceAll("<.?script>", "");
 				//				int goal_amount = Integer.parseInt(request.getParameter("goal_amount"));
@@ -72,9 +70,8 @@ public class BoardController extends HttpServlet {
 						if(fi.getSize()==0) {continue;}
 
 						if(fi.isFormField()) {
-							System.out.println(fi.getFieldName());
-
-
+							System.out.println(fi.getName());
+						
 						}else {	
 							//	
 							UfileDTO dto = new UfileDTO();
