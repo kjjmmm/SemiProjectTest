@@ -32,10 +32,13 @@ public class MembersController extends HttpServlet {
 
 		if (cmd.equals("/Main.members")) {
 			request.getRequestDispatcher("main.jsp").forward(request, response);
+
+		}else if(cmd.equals("/Introduce.members")) {
+			request.getRequestDispatcher("/WEB-INF/basics/introduce.jsp").forward(request, response);
 			
-		} else if (cmd.equals("/JoinForm.members")) {
+		}else if (cmd.equals("/JoinForm.members")) {
 			request.getRequestDispatcher("/WEB-INF/basics/joinForm.jsp").forward(request, response);
-			
+
 		} else if (cmd.equals("/EmailDuplCheck.members")) {
 			String email = request.getParameter("email");
 			try {
@@ -44,7 +47,7 @@ public class MembersController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 		} else if (cmd.equals("/SendMail.members")) {
 			String email = request.getParameter("email");
 			try {
@@ -53,7 +56,7 @@ public class MembersController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 		} else if (cmd.equals("/Join.members")) {
 			String email = request.getParameter("email");
 			String pw = request.getParameter("pw");
@@ -71,7 +74,7 @@ public class MembersController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 		} else if (cmd.equals("/Login.members")) {
 			String email = request.getParameter("email");
 			String pw = request.getParameter("pw");
@@ -85,7 +88,7 @@ public class MembersController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 		} else if (cmd.equals("/Logout.members")) {
 			request.getSession().invalidate();
 			request.getRequestDispatcher("/WEB-INF/basics/alertLogout.jsp").forward(request, response);
