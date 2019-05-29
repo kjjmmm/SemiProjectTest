@@ -33,23 +33,23 @@ public class TitleImgDAO {
 		}
 	}
 	
-	public PreparedStatement pstatForGetTitleImg(Connection con, int boardNo) throws Exception {
-		String sql = "select * from title_img where t_b_no=?";
-		PreparedStatement pstat = con.prepareStatement(sql);
-		pstat.setInt(1, boardNo);
-		return pstat;
-	}
-	public TitleImgDTO getTitleImg(int boardNo) throws Exception {
-		try(
-				Connection con = this.getConnection();
-				PreparedStatement pstat = this.pstatForGetTitleImg(con, boardNo);
-				ResultSet rs = pstat.executeQuery();
-				){
-			if(rs.next()) {
-				TitleImgDTO dto = new TitleImgDTO(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6));
-				return dto;
-			}
-		}
-		return null;
-	}
+//	public PreparedStatement pstatForGetTitleImg(Connection con, int boardNo) throws Exception {
+//		String sql = "select * from title_img where t_b_no=?";
+//		PreparedStatement pstat = con.prepareStatement(sql);
+//		pstat.setInt(1, boardNo);
+//		return pstat;
+//	}
+//	public TitleImgDTO getTitleImg(int boardNo) throws Exception {
+//		try(
+//				Connection con = this.getConnection();
+//				PreparedStatement pstat = this.pstatForGetTitleImg(con, boardNo);
+//				ResultSet rs = pstat.executeQuery();
+//				){
+//			if(rs.next()) {
+//				TitleImgDTO dto = new TitleImgDTO(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6));
+//				return dto;
+//			}
+//		}
+//		return null;
+//	}
 }

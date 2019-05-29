@@ -130,7 +130,6 @@ public class MembersController extends HttpServlet {
 				if (responseCode == 200) {
 					String ip = request.getRemoteAddr();
 					MemberDTO dto = dao.NaverContentsParse(res.toString(), ip);
-
 					if (dao.isIdExist(dto)) {
 						request.getSession().setAttribute("navercontents", dto);
 						request.getRequestDispatcher("main.jsp").forward(request, response);

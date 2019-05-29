@@ -105,9 +105,9 @@ public class BoardController extends HttpServlet {
 					response.sendRedirect("error.jsp");
 				}
 			}else if(cmd.equals("/Read.board")) {
-				int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-				TitleImgDTO titleImg = tdao.getTitleImg(boardNo);
-				request.setAttribute("titleImg", titleImg.getFilePath());
+//				int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+//				TitleImgDTO titleImg = tdao.getTitleImg(boardNo);
+//				request.setAttribute("titleImg", titleImg.getFilePath());
 				
 //				BoardDTO article = dao.selectOneArticle(boardNo);
 //				request.setAttribute("result", article);

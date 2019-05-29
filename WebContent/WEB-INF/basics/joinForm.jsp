@@ -190,6 +190,7 @@ li {
 				alert("이름을 입력해주세요.");
 			}
 			else{
+				alert("메일 발송중입니다. 잠시만 기다려주세요.");
 				$.ajax({
 					url: "SendMail.members",
 					type: "post",
