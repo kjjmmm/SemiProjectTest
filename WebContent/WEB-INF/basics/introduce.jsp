@@ -8,6 +8,7 @@
 <title>Introduce</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Bitter|Dancing+Script|Inconsolata|Indie+Flower|Nanum+Pen+Script|Poiret+One" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Cute+Font|Noto+Serif+KR:700|Do+Hyeon|Sunflower:300|Jua|Nanum+Gothic|Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 <style>
 	
@@ -27,11 +28,11 @@
 	.wrapper {
 		display: inline-block;
 	}
-	a {
+	.navA{
 		font-weight: bold;
 		color: #fcfcfc;
 	}
-	a:hover {
+	.navA:hover {
 		color: #000000;
 		text-decoration: none;
 	}
@@ -79,11 +80,10 @@
         padding-right: 400px;
         font-size: 20px;
     }
-    
     #lastmenu1{
         float: left;
         margin: 120px;
-        padding-left: 300px;
+        padding-left: 500px;
         font-family: 'Poiret One', cursive;
     }
     #lastmenu2{
@@ -96,13 +96,6 @@
         float: left;
         margin: 120px;
         padding-left: 50px;
-        font-family: 'Poiret One', cursive;
-    }
-    #lastmenu4{
-        float: left;
-        margin: 170px;
-        padding: 20px;
-        text-align: left;
         font-family: 'Poiret One', cursive;
     }
     #footer{
@@ -131,8 +124,11 @@
         padding: 10px;
     }
     .sub-last{
-    	font-weight: 100;
-		color: #fcfcfc;
+    	width: 200px;
+    	font-weight: light;
+    }
+    .sub-last:hover{
+    	color : #fa7268;
     }
     .sub-last1{
     	width: 200px;
@@ -146,6 +142,33 @@
     .sub-last3{
         padding: 10px;
     }
+    #footerMenu01{
+    	color: #fcfcfc;
+    }
+    #footerMenu02{
+    	color: #fcfcfc;
+    }
+    #footerMenu03{
+    	color: #fcfcfc;
+    }
+    #footerMenu04{
+    	color: #fcfcfc;
+    }
+    #footerMenu05{
+    	color: #fcfcfc;
+    }
+    #footerMenu06{
+    	color: #fcfcfc;
+    }
+    #footerMenu07{
+    	color: #fcfcfc;
+    }
+    #footerMenu08{
+    	color: #fcfcfc;
+    }
+    #footerMenu09{
+    	color: #fcfcfc;
+    }
 </style>
 </head>
 <body>
@@ -153,8 +176,7 @@
 		<div id="wrapper">
 			<nav class="navbar navbar-expand-md navbar-light navbar-fixed-top">
 				<div class="logo">
-					<a class="navbar-brand" href="Main.members">
-					<img src="logo/bridge_logo2.png" width="150px"></a>
+					<a class="navbar-brand" href="Main.members" style="font-family: 'Cute Font', cursive;"><h1>도움닿기</h1></a>
 				</div>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarNav" aria-controls="navbarNav"
@@ -163,19 +185,19 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link" href="Introduce.members">소개</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">후원안내</a></li>
-						<li class="nav-item"><a class="nav-link" href="to_write.board">후원해 주세요</a></li>
-						<li class="nav-item"><a class="nav-link" href="textList.board?currentPage=1">후원 게시판</a></li>
+						<li class="nav-item"><a class="nav-link navA" href="Introduce.members">소개</a></li>
+						<li class="nav-item"><a class="nav-link navA" href="#">후원안내</a></li>
+						<li class="nav-item"><a class="nav-link navA" href="to_write.board">후원해 주세요</a></li>
+						<li class="nav-item"><a class="nav-link navA" href="textList.board?currentPage=1">후원 게시판</a></li>
 		
 						<c:choose>
 							<c:when test="${sessionScope.loginEmail != null || navercontents.name != null}">
-								<li class="nav-item"><a class="nav-link"
+								<li class="nav-item"><a class="nav-link navA"
 									href="Logout.members">로그아웃</a></li>
 							</c:when>
 							<c:otherwise>
-								<li class="nav-item"><a class="nav-link" href="LoginForm.members">로그인</a></li>
-								<li class="nav-item"><a class="nav-link" href="JoinForm.members">회원가입</a></li>
+								<li class="nav-item"><a class="nav-link navA" href="LoginForm.members">로그인</a></li>
+								<li class="nav-item"><a class="nav-link navA" href="JoinForm.members">회원가입</a></li>
 							</c:otherwise>
 						</c:choose>
 					</ul>
@@ -207,26 +229,25 @@
 	            <div id="lastmenu1">
 	                <ul class="sublast1">
 	                    <li class="sub-last1"> Hello, Getaway </li>
-	                    <li class="sub-last"><a href=""> About </a></li>
-	                    <li class="sub-last"><a href=""> FAQ </a></li>
-	                    <li class="sub-last"><a href=""> Contact Us </a></li>
+	                    <li id="footerMenu01" class="sub-last"><a href=""> About </a></li>
+	                    <li id="footerMenu02" class="sub-last"><a href=""> FAQ </a></li>
+	                    <li id="footerMenu03" class="sub-last"><a href=""> Contact Us </a></li>
 	                </ul>
 	            </div>
 	            <div id="lastmenu2">
 	                <ul class="sublast2">
 	                    <li class="sub-last1"> Ways to Escape </li>
-	                    <li class="sub-last"><a href=""> Multi-Night Packs </a></li>
-	                    <li class="sub-last"><a href=""> Gift Cards </a></li>
-	                    <li class="sub-last"><a href=""> Student Program </a></li>
-	                    <li class="sub-last"><a href=""> Artist Fellowships </a></li>
+	                    <li id="footerMenu04" class="sub-last"><a href=""> Multi-Night Packs </a></li>
+	                    <li id="footerMenu05" class="sub-last"><a href=""> Student Program </a></li>
+	                    <li id="footerMenu06" class="sub-last"><a href=""> Artist Fellowships </a></li>
 	                </ul>
 	            </div>
 	            <div id="lastmenu3">
 	                <ul class="sublast3">
 	                    <li class="sub-last1"> The Getaway Way </li>
-	                    <li class="sub-last"><a href=""> The Journal </a></li>
-	                    <li class="sub-last"><a href=""> The Getaway Podcast </a></li>
-	                    <li class="sub-last"><a href=""> The Book </a></li>
+	                    <li id="footerMenu07" class="sub-last"><a href=""> The Journal </a></li>
+	                    <li id="footerMenu08" class="sub-last"><a href=""> The Getaway Podcast </a></li>
+	                    <li id="footerMenu09" class="sub-last"><a href=""> The Book </a></li>
 	                </ul>
 	            </div>
 	        </div>

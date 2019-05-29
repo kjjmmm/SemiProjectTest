@@ -3,7 +3,6 @@ package kh.semi.servlet;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,18 +14,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
 import org.apache.commons.io.FileExistsException;
 
 import kh.semi.dao.BoardDAO;
-import kh.semi.dto.BoardDTO;
 import kh.semi.dto.UfileDTO;
 
 
 @WebServlet("*.board")
 public class BoardController extends HttpServlet {	
 	private int fileIdNo = 1;
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -37,17 +34,20 @@ public class BoardController extends HttpServlet {
 		String cmd = requestURI.substring(contextPath.length());
 		BoardDAO dao = new BoardDAO();
 		try {
-			if(cmd.contentEquals("/supportme.board")) {
-//				String title = request.getParameter("title");
-//				title.replaceAll("<.?script>", "");
-//				int goal_amount = Integer.parseInt(request.getParameter("goal_amount"));
-//				String end = request.getParameter("end_period");
-//				String bank = request.getParameter("bank");
-//				bank.replaceAll("<.?script>", "");
-//				String account = request.getParameter("account");
-//				account.replaceAll("<.?script>", "");
-				
-	//----------- receiving main photo attached. multipart/form-data		
+			if(cmd.contentEquals("/write.board")) {
+				request.getRequestDispatcher("/WEB-INF/boards/writer.jsp").forward(request, response);
+			}else if(cmd.contentEquals("/supportMe.board")) {
+
+				//				String title = request.getParameter("title");
+				//				title.replaceAll("<.?script>", "");
+				//				int goal_amount = Integer.parseInt(request.getParameter("goal_amount"));
+				//				String end = request.getParameter("end_period");
+				//				String bank = request.getParameter("bank");
+				//				bank.replaceAll("<.?script>", "");
+				//				String account = request.getParameter("account");
+				//				account.replaceAll("<.?script>", "");
+
+				//----------- receiving main photo attached. multipart/form-data		
 				String rootPath = this.getServletContext().getRealPath("/");	
 				String filePath = rootPath + "files";	
 
@@ -70,9 +70,8 @@ public class BoardController extends HttpServlet {
 						if(fi.getSize()==0) {continue;}
 
 						if(fi.isFormField()) {
-							System.out.println(fi.getFieldName());
-							
-							
+							System.out.println(fi.getName());
+						
 						}else {	
 							//	
 							UfileDTO dto = new UfileDTO();
@@ -95,7 +94,7 @@ public class BoardController extends HttpServlet {
 							}
 							response.setCharacterEncoding("UTF-8");
 							response.getWriter().append("files/"+dto.getFileName());
-//							int result = dao.insert(dto);		
+							//							int result = dao.insert(dto);		
 
 							try {
 								fi.write(new File(filePath+"/"+tempFileName)); 
@@ -108,7 +107,7 @@ public class BoardController extends HttpServlet {
 					e.printStackTrace();
 					response.sendRedirect("error.jsp");
 				}
-				
+
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

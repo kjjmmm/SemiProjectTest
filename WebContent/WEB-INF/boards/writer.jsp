@@ -78,13 +78,12 @@ li {
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link" href="#">소개</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">후원안내</a></li>
-				<li class="nav-item"><a class="nav-link" href="supportme.board">후원해
+				<li class="nav-item"><a class="nav-link" href="write.board">후원해
 						주세요</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="textList.board?currentPage=1">후원 게시판</a></li>
 				<c:choose>
-					<c:when test="${sessionScope.loginEmail != null}">
+					<c:when test="${sessionScope.loginEmail != null || navercontents.name != null}">
 						<li class="nav-item"><a class="nav-link"
 							href="Logout.members">로그아웃</a></li>
 					</c:when>
@@ -100,29 +99,45 @@ li {
 	</nav>
 	<hr>
 	<div id="wrapper">
-		<form action="supportme.board" method="post" id="all"
+		<form action="supportMe.board" method="post" id="all"
 			enctype="multipart/form-data">
-			<div class="form-group">
-				후원 게시판에 표시될 사진 파일을 첨부해 주세요. <input type="file" class="photo"
-					name="file" value="사진 첨부">
-			</div>
 			<div class="form-group">
 				<input type="text" class="form-control" id="title" name="title"
 					aria-describedby="" placeholder="제목을 입력해 주세요." required>
 			</div>
 			<div class="form-group">
-				<input type="number" class="form-control" id="goal_amount"
-					name="goal_amount" aria-describedby="" placeholder="목표모금액" min="10000" max="10000000" required>
+				후원 게시판에 표시될 사진 파일을 첨부해 주세요. <input type="file" class="photo"
+					name="file" value="사진 첨부">
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" id="writer" name="writer"
+					aria-describedby="" placeholder="작성자 성함" required>
+			</div>
+			<div class="form-group">
+				<input type="number" class="form-control" id="amount"
+					name="amount" aria-describedby="" placeholder="목표모금액" min="10000" max="10000000" required>
 			</div>
 			<div class="form-group">
 				모금 마감날짜를 입력해 주세요.(모금은 후원글이 등록된 시점부터 시작됩니다.) <input type="date"
-					class="form-control" id="start_period" name="end_period"
+					class="form-control" id="start_period" name="endPeriod"
 					aria-describedby="" placeholder="" required>
 			</div>
 			<div class="form-group">
-				후원받으실 계좌의 은행명과 계좌번호를 입력해 주세요. <input type="text"
-					class="form-control" id="bank" name="bank" aria-describedby=""
-					placeholder="은행명 예)신한" required> <input type="text"
+				후원받으실 계좌의 은행명을 선택하고 계좌번호를 입력해 주세요. 
+				<select>
+					<option value="신한">신한</option>
+					<option value="국민">국민</option>
+					<option value="농협">농협</option>
+					<option value="우리">우리</option>
+					<option value="기업">기업</option>
+					<option value="하나">하나</option>
+					<option value="부산">부산</option>
+					<option value="경남">경남</option>
+					<option value="SC">SC</option>
+					<option value="수협">수협</option>
+					<option value="우체국">우체국</option>
+				</select>
+				<input type="text"
 					class="form-control" id="account" name="account"
 					aria-describedby="" placeholder="계좌번호 '-' 제외하고 입력" required>
 			</div>
