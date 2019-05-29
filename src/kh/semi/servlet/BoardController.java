@@ -75,12 +75,8 @@ public class BoardController extends HttpServlet {
 								boardDTO.setAccount(fi.getString());
 							}else if(fi.getFieldName().contentEquals("mycontent")) {
 								boardDTO.setContents(fi.getString());
+								System.out.println(fi.getString());
 							}
-							
-							int result = dao.insertBoard(boardDTO);
-							request.setAttribute("result", result);
-							request.getRequestDispatcher("writer.jsp").forward(request, response);
-							
 							
 						}else {	
 							//	
@@ -113,6 +109,9 @@ public class BoardController extends HttpServlet {
 							}
 						}
 					}
+					int result = dao.insertBoard(boardDTO);
+					request.setAttribute("result", result);
+					request.getRequestDispatcher("writer.jsp").forward(request, response);
 				}catch(Exception e) {
 					e.printStackTrace();
 					response.sendRedirect("error.jsp");
