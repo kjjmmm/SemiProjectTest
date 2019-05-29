@@ -13,7 +13,7 @@ public class BoardDTO {
 	private String contents;
 	private String dueDate;
 	private int viewCount;
-	private Timestamp writeDate;	
+	private String writeDate;	
 	private int recommend;
 	private int sumAmount;
 	// 총 14개
@@ -21,7 +21,7 @@ public class BoardDTO {
 		super();
 	}
 	public BoardDTO(int boardNo, String title, String writer, int amount, String bank, String account, String contents,
-			String dueDate, int viewCount, Timestamp writeDate, int recommend, int sumAmount) {
+			String dueDate, int viewCount, String writeDate, int recommend, int sumAmount) {
 		super();
 		this.boardNo = boardNo;
 		this.title = title;
@@ -90,10 +90,10 @@ public class BoardDTO {
 	public void setViewCount(int viewCount) {
 		this.viewCount = viewCount;
 	}
-	public Timestamp getWriteDate() {
+	public String getWriteDate() {
 		return writeDate;
 	}
-	public void setWriteDate(Timestamp writeDate) {
+	public void setWriteDate(String writeDate) {
 		this.writeDate = writeDate;
 	}
 	public int getRecommend() {

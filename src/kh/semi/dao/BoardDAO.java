@@ -54,5 +54,39 @@ public class BoardDAO {
 		}
 
 	}
+	private PreparedStatement pstatForSelectOneArticle(Connection con, int boardNo)throws Exception{
+		String sql = "select * from board where b_no=?";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		pstat.setInt(1, boardNo);
+		return pstat;
+	}
+	
+	public BoardDTO selectOneArticle(int boardNo)throws Exception{
+	try(
+			Connection con = this.getConnection();
+			PreparedStatement pstat = pstatForSelectOneArticle(con, boardNo);
+			ResultSet rs = pstat.executeQuery();
+			){
+		BoardDTO boardDTO = new BoardDTO();
+		if(rs.next()) {
+			boardDTO.setBoardNo(rs.getInt("b_no"));
+			boardDTO.setTitle(rs.getString("b_title"));
+			boardDTO.setWriter(rs.getString("b_writer"));
+			boardDTO.setAmount(rs.getInt("b_amount"));
+			boardDTO.setBank(rs.getString("b_bank"));
+			boardDTO.setAccount(rs.getString("b_account"));
+			boardDTO.setDueDate(rs.getString("b_due_date"));
+			boardDTO.setContents(rs.getString("b_contents1")+rs.getString("b_contents2")+rs.getString("b_contents3"));
+			boardDTO.setViewCount(rs.getInt("b_viewcount"));
+			boardDTO.setWriteDate(rs.getString("b_writedate"));
+			boardDTO.setRecommend(rs.getInt("b_recommend"));
+			boardDTO.setSumAmount(rs.getInt("b_sum_amount"));
+			return boardDTO;
+		}
+		return null;
+	}
+	
+		
+	}
 }
 
