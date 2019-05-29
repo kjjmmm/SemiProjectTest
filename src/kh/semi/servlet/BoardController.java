@@ -15,11 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
 import org.apache.commons.io.FileExistsException;
 
 import kh.semi.dao.BoardDAO;
+import kh.semi.dao.PaymentDAO;
 import kh.semi.dto.BoardDTO;
+import kh.semi.dto.PaymentDTO;
 import kh.semi.dto.UfileDTO;
 
 
@@ -36,6 +37,8 @@ public class BoardController extends HttpServlet {
 
 		String cmd = requestURI.substring(contextPath.length());
 		BoardDAO dao = new BoardDAO();
+		PaymentDAO pdao = new PaymentDAO();
+		
 		try {
 			if(cmd.contentEquals("/to_write.board")){
 				request.getRequestDispatcher("/WEB-INF/boards/write_supportme.jsp").forward(request, response);
@@ -280,6 +283,22 @@ public class BoardController extends HttpServlet {
 				int result = dao.deleteArticle(textNo);
 				request.setAttribute("result", result);
 				request.getRequestDispatcher("/WEB-INF/boards/deleteArticle.jsp").forward(request, response);
+			}else if(cmd.equals("/Payment.board")) {
+				int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+				String name = request.getParameter("name");
+				String email = request.getParameter("email");
+				String phone = request.getParameter("phone");
+				int amount = Integer.parseInt(request.getParameter("amount"));
+				
+				try {
+					PaymentDTO dto = new PaymentDTO(boardNo, name, email, phone, amount, null);
+					int result = pdao.insertPayment(dto);
+					request.setAttribute("result", result);
+					request.setAttribute("payment", dto);
+					request.getRequestDispatcher("/WEB-INF/boards/payCompleted.jsp").forward(request, response);
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

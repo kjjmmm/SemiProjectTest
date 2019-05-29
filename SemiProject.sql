@@ -28,13 +28,16 @@ create table board(
     b_title varchar(100) not null,
     b_writer varchar(20) not null,
     b_amount number not null,
+    b_bank varchar(20) not null,
     b_account number not null,
     b_closing_date timestamp not null,
-    b_contents varchar(4000) not null,
-    b_viewcount number not null,
+    b_contents1 varchar(4000) not null,
+    b_contents2 varchar(4000),
+    b_contents3 varchar(4000),
+    b_viewcount number default 0,
     b_writedate timestamp default sysdate not null,
-    b_recommand number not null
-    -- ê¸°ë¶€ê°€ ì–¼ë§ˆë‚˜ ëëŠ”ì§€ ì•Œ ìˆ˜ ìˆëŠ” ì»¬ëŸ¼ ì¶”ê°€
+    b_recommend number default 0 not null,
+    b_sum_amount number default 0
 );
 drop table board;
 
@@ -43,19 +46,23 @@ start with 1
 increment by 1
 nocache
 nomaxvalue;
+drop sequence b_no_seq;
 
 select * from board;
+
+insert into board values(b_no_seq.nextval, '½Ä¹°ÀÎ°£ ¾Æ¹öÁö¸¦ ÁöÅ°´Â ¼Ò³â ·¹½½·¯ µ¿È£', 'ÀüÇØ¿ë', 1000000,
+'½ÅÇÑ', 111222334455, '20190607', 'µµ¿ÍÁÖ¼¼¿ä ¿©·¯ºĞ!', default, default, default, default);
 
 --------------------------------------------------------------------------------
 
 create table title_img(
-    -- ì—¬ê¸° ìˆ˜ì •!!!!!!
-    t_b_no foreign key references board(b_no) on update cascade on delete cascade,
+    t_b_no number,
     t_fileSeq number primary key,
     t_fileName varchar(300) not null,
     t_oriFileName varchar(300) not null,
     t_filePath varchar(300) not null,
-    t_fileSize number not null
+    t_fileSize number not null,
+    constraint t_b_no_fk foreign key(t_b_no) references board(b_no) on delete cascade
 );
 drop table title_img;
 
@@ -64,9 +71,10 @@ select * from title_img;
 --------------------------------------------------------------------------------
 
 create table payment(
-    p_contributor varchar(20) not null, -- ê¸°ë¶€í•œ ì‚¬ëŒ ì´ë¦„
-    -- ì´ë¦„, ì´ë©”ì¼, ì „í™”ë²ˆí˜¸
-    p_b_title varchar(100) not null,
+    p_b_no number not null,
+    p_name varchar(20) not null,
+    p_email varchar(30) not null,
+    p_phone varchar(20) not null,
     p_amount number not null,
     p_payment_date timestamp default sysdate not null
 );

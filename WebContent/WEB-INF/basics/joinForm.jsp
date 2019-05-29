@@ -121,22 +121,10 @@ li {
 						주세요</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="textList.board?currentPage=1">후원 게시판</a></li>
-				<c:choose>
-					<c:when test="${sessionScope.loginEmail != null}">
-						<li class="nav-item"><a class="nav-link"
-							href="Logout.members">로그아웃</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="nav-item"><a class="nav-link"
-							href="LoginForm.members">로그인</a></li>
-						<li class="nav-item"><a class="nav-link"
-							href="JoinForm.members">회원가입</a></li>
-					</c:otherwise>
-				</c:choose>
-
-				<!-- <li class="nav-item"><a class="nav-link" href="#">후원하기</a></li>
-				<li class="nav-item"><a class="nav-link" href="LoginForm.members">로그인</a></li>
-				<li class="nav-item"><a class="nav-link" href="JoinForm.members">회원가입</a></li> -->
+				<li class="nav-item"><a class="nav-link"
+					href="LoginForm.members">로그인</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="JoinForm.members">회원가입</a></li>
 			</ul>
 		</div>
 	</nav>
