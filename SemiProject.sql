@@ -20,6 +20,8 @@ drop table members;
 
 select * from members;
 
+commit;
+
 
 --------------------------------------------------------------------------------
 
@@ -27,9 +29,9 @@ create table board(
     b_no number primary key,
     b_title varchar(100) not null,
     b_writer varchar(20) not null,
-    b_amount varchar(30) not null,
+    b_amount number not null,
     b_bank varchar(20) not null,
-    b_account number not null,
+    b_account varchar(30) not null,
     b_due_date timestamp not null,
     b_contents1 varchar(4000) not null,
     b_contents2 varchar(4000),
@@ -87,5 +89,27 @@ create table payment(
 drop table payment;
 
 select * from payment;
+
+commit;
+
+--------------------------------------------------------------------------------
+
+create table ufile(
+    fileSeq number primary key,
+    fileName varchar(300) not null,
+    oriFileName varchar(300) not null,
+    filePath varchar(300) not null,
+    fileSize number not null
+);
+drop table ufile;
+
+create sequence file_seq
+start with 1
+increment by 1
+nocache
+nomaxvalue;
+drop sequence file_seq;
+
+select * from ufile;
 
 commit;
