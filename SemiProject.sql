@@ -27,7 +27,7 @@ create table board(
     b_no number primary key,
     b_title varchar(100) not null,
     b_writer varchar(20) not null,
-    b_amount number not null,
+    b_amount varchar(30) not null,
     b_bank varchar(20) not null,
     b_account number not null,
     b_due_date timestamp not null,

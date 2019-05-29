@@ -17,6 +17,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileExistsException;
 
 import kh.semi.dao.BoardDAO;
+import kh.semi.dto.BoardDTO;
 import kh.semi.dto.UfileDTO;
 
 
@@ -37,17 +38,7 @@ public class BoardController extends HttpServlet {
 			if(cmd.contentEquals("/write.board")) {
 				request.getRequestDispatcher("/WEB-INF/boards/writer.jsp").forward(request, response);
 			}else if(cmd.contentEquals("/supportMe.board")) {
-
-				//				String title = request.getParameter("title");
-				//				title.replaceAll("<.?script>", "");
-				//				int goal_amount = Integer.parseInt(request.getParameter("goal_amount"));
-				//				String end = request.getParameter("end_period");
-				//				String bank = request.getParameter("bank");
-				//				bank.replaceAll("<.?script>", "");
-				//				String account = request.getParameter("account");
-				//				account.replaceAll("<.?script>", "");
-
-				//----------- receiving main photo attached. multipart/form-data		
+	
 				String rootPath = this.getServletContext().getRealPath("/");	
 				String filePath = rootPath + "files";	
 
@@ -64,14 +55,33 @@ public class BoardController extends HttpServlet {
 				ServletFileUpload sfu = new ServletFileUpload(diskFactory);
 				sfu.setSizeMax(10 * 1024 * 1024); 
 
+				BoardDTO boardDTO = new BoardDTO();
 				try {
 					List<FileItem> items = sfu.parseRequest(request);		
 					for(FileItem fi : items) {
 						if(fi.getSize()==0) {continue;}
 
 						if(fi.isFormField()) {
-							System.out.println(fi.getName());
-						
+							
+							if(fi.getFieldName().contentEquals("title")) {
+								boardDTO.setTitle(fi.getString());
+							}else if(fi.getFieldName().contentEquals("writer")) {
+								boardDTO.setWriter(fi.getString());
+							}else if(fi.getFieldName().contentEquals("amount")) {
+								boardDTO.setAmount(Integer.parseInt(fi.getString()));
+							}else if(fi.getFieldName().contentEquals("select")) {
+								boardDTO.setBank(fi.getString());
+							}else if(fi.getFieldName().contentEquals("account")) {
+								boardDTO.setAccount(fi.getString());
+							}else if(fi.getFieldName().contentEquals("mycontent")) {
+								boardDTO.setContents(fi.getString());
+							}
+							
+							int result = dao.insertBoard(boardDTO);
+							request.setAttribute("result", result);
+							request.getRequestDispatcher("writer.jsp").forward(request, response);
+							
+							
 						}else {	
 							//	
 							UfileDTO dto = new UfileDTO();
