@@ -231,8 +231,6 @@ li {
 			</div>
 		</div>
 	</div>
-
-
 	<script>
 		$.ajax({
 			url : "Fund",

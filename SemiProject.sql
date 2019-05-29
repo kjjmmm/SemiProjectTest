@@ -6,7 +6,7 @@ commit;
 
 create table members(
     m_email varchar(30) primary key,
-    m_pw varchar(100) not null,
+    m_pw varchar(100),
     m_name varchar(20) not null,
     m_phone varchar(20),
     m_zipcode varchar(20),
@@ -30,7 +30,7 @@ create table board(
     b_amount number not null,
     b_bank varchar(20) not null,
     b_account number not null,
-    b_closing_date timestamp not null,
+    b_due_date timestamp not null,
     b_contents1 varchar(4000) not null,
     b_contents2 varchar(4000),
     b_contents3 varchar(4000),
@@ -50,9 +50,6 @@ drop sequence b_no_seq;
 
 select * from board;
 
-insert into board values(b_no_seq.nextval, '식물인간 아버지를 지키는 소년 레슬러 동호', '전해용', 1000000,
-'신한', 111222334455, '20190607', '도와주세요 여러분!', default, default, default, default);
-
 --------------------------------------------------------------------------------
 
 create table title_img(
@@ -66,7 +63,16 @@ create table title_img(
 );
 drop table title_img;
 
+create sequence t_fileSeq_seq
+start with 1
+increment by 1
+nocache
+nomaxvalue;
+drop sequence t_fileSeq_seq;
+
 select * from title_img;
+
+
 
 --------------------------------------------------------------------------------
 

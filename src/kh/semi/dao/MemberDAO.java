@@ -1,5 +1,9 @@
 package kh.semi.dao;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -7,7 +11,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -21,12 +24,15 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import kh.semi.dto.MemberDTO;
 
 public class MemberDAO {
 	public Connection getConnection() throws Exception {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
-		String url = "jdbc:oracle:thin:@192.168.60.23:1521:xe";
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String user = "semi";
 		String pw = "semi";
 		return DriverManager.getConnection(url, user, pw);
@@ -49,6 +55,89 @@ public class MemberDAO {
 		}
 		return SHA;
 	}
+	
+	
+public int insertNaverMember(MemberDTO param) throws Exception{
+		
+		String sql = "insert into members (m_email,m_name,m_joinDate,m_ipaddress,m_admin) values(?,?,default,?,'n')";
+		
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			
+			pstat.setString(1, param.getEmail());
+			pstat.setString(2, param.getName());
+			pstat.setString(3, param.getIpAddress());
+			
+			int result = pstat.executeUpdate();
+			
+			con.commit();
+			return result;
+		}
+	}
+	
+	public boolean isIdExist(MemberDTO param) throws Exception{
+		
+		String sql = "select * from members where m_email = ?";
+		
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			
+			pstat.setString(1, param.getEmail());
+			
+			try(ResultSet rs = pstat.executeQuery();){
+				
+				return rs.next();
+			}
+		}
+		
+	}
+	
+	public MemberDTO NaverContentsParse(String res, String ipaddr) throws Exception{
+		
+        JsonParser parser = new JsonParser();
+        JsonObject ob = (JsonObject) parser.parse(res.toString());
+        String access_t = ob.get("access_token").getAsString();
+        
+        String token = access_t;// 네이버 로그인 접근 토큰;
+        String header = "Bearer " + token; // Bearer 다음에 공백 추가
+       
+            String apiURL1 = "https://openapi.naver.com/v1/nid/me";
+            URL url1 = new URL(apiURL1);
+            HttpURLConnection con1 = (HttpURLConnection)url1.openConnection();
+            con1.setRequestMethod("GET");
+            con1.setRequestProperty("Authorization", header);
+            int responseCode1 = con1.getResponseCode();
+            BufferedReader br1;
+            if(responseCode1==200) { // 정상 호출
+                br1 = new BufferedReader(new InputStreamReader(con1.getInputStream()));
+            } else {  // 에러 발생
+                br1 = new BufferedReader(new InputStreamReader(con1.getErrorStream()));
+            }
+            String inputLine1;
+            StringBuffer response1 = new StringBuffer();
+            while ((inputLine1 = br1.readLine()) != null) {
+                response1.append(inputLine1);
+            }
+            br1.close();
+            
+            String ob2 = response1.toString();
+            JsonObject Jsonob2 = parser.parse(ob2).getAsJsonObject();
+            JsonObject Json_response = Jsonob2.get("response").getAsJsonObject();
+            
+            String id = Json_response.get("id").getAsString();
+            String name = Json_response.get("name").getAsString();
+            String email = Json_response.get("email").getAsString();
+            
+            System.out.println(id +  name + email);
+            
+            MemberDTO dto = new MemberDTO();
+            dto.setEmail(email);
+            dto.setIpAddress(ipaddr);
+            dto.setName(name);
+            
+            return dto;
+	}
+	
+	
+	
 	public int insertMember(MemberDTO dto) throws Exception {
 		String sql = "insert into members values (?,?,?,?,?,?,?,default,?,?)";
 		try(
@@ -196,8 +285,10 @@ public class MemberDAO {
 }
 
 class MyAuthentication extends Authenticator {
+	
 	PasswordAuthentication pa;
 	public MyAuthentication(){
+
 		String id = "123@gmail.com";       // 구글 ID
 		String pw = "123";          // 구글 비밀번호
 		// ID와 비밀번호를 입력한다.

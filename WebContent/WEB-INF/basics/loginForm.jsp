@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -123,10 +125,8 @@ li{
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="#">소개</a></li>
-
-				<li class="nav-item"><a class="nav-link" href="#">후원안내</a></li>
-				<li class="nav-item"><a class="nav-link" href="to_write.board">후원해
+				<li class="nav-item"><a class="nav-link" href="Introduce.members">소개</a></li>
+				<li class="nav-item"><a class="nav-link" href="write.board">후원해
 						주세요</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="textList.board?currentPage=1">후원 게시판</a></li>
@@ -158,7 +158,18 @@ li{
 				</div>
 				<button type="submit" class="btn btn-primary btn-md btn-block"
 					style="font-size: 18px; font-weight: bold;">로그인</button>
-
+ <%
+    String clientId = "9fcJ6ehu7V7mEFnBQABz";//애플리케이션 클라이언트 아이디값";
+    String redirectURI = URLEncoder.encode("http://localhost:8080/SemiProject/naverLogin.members", "UTF-8");
+    SecureRandom random = new SecureRandom();
+    String state = new BigInteger(130, random).toString();
+    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+    apiURL += "&client_id=" + clientId;
+    apiURL += "&redirect_uri=" + redirectURI;
+    apiURL += "&state=" + state;
+    session.setAttribute("state", state);
+ %>
+ <a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
 				<div id="toJoin">
 
 					아직 계정이 없으신가요?&nbsp;&nbsp;&nbsp;<a href="JoinForm.members" id="a_join"
