@@ -61,14 +61,29 @@ public class BoardController extends HttpServlet {
 				ServletFileUpload sfu = new ServletFileUpload(diskFactory);
 				sfu.setSizeMax(10 * 1024 * 1024); 
 
+				BoardDTO boardDTO = new BoardDTO();
 				try {
 					List<FileItem> items = sfu.parseRequest(request);		
 					for(FileItem fi : items) {
 						if(fi.getSize()==0) {continue;}
 
 						if(fi.isFormField()) {
-							System.out.println(fi.getName());
-						
+							
+							if(fi.getFieldName().contentEquals("title")) {
+								boardDTO.setTitle(fi.getString());
+							}else if(fi.getFieldName().contentEquals("writer")) {
+								boardDTO.setWriter(fi.getString());
+							}else if(fi.getFieldName().contentEquals("amount")) {
+								boardDTO.setAmount(Integer.parseInt(fi.getString()));
+							}else if(fi.getFieldName().contentEquals("select")) {
+								boardDTO.setBank(fi.getString());
+							}else if(fi.getFieldName().contentEquals("account")) {
+								boardDTO.setAccount(fi.getString());
+							}else if(fi.getFieldName().contentEquals("mycontent")) {
+								boardDTO.setContents(fi.getString());
+								System.out.println(fi.getString());
+							}
+							
 						}else {	
 							//	
 							UfileDTO dto = new UfileDTO();
@@ -100,6 +115,9 @@ public class BoardController extends HttpServlet {
 							}
 						}
 					}
+					int result = dao.insertBoard(boardDTO);
+					request.setAttribute("result", result);
+					request.getRequestDispatcher("writer.jsp").forward(request, response);
 				}catch(Exception e) {
 					e.printStackTrace();
 					response.sendRedirect("error.jsp");
