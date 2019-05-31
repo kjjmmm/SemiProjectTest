@@ -16,6 +16,8 @@ public class MemberDTO {
 	
 	public MemberDTO() {}
 	
+	
+	
 	public MemberDTO(String email, String name, Timestamp joinDate, String ipAddress, String admin) {
 		this.email = email;
 		this.name = name;

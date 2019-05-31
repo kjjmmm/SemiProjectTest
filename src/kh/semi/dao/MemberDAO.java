@@ -32,7 +32,7 @@ import kh.semi.dto.MemberDTO;
 public class MemberDAO {
 	public Connection getConnection() throws Exception {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
-		String url = "jdbc:oracle:thin:@192.168.60.23:1521:xe";
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String user = "semi";
 		String pw = "semi";
 		return DriverManager.getConnection(url, user, pw);
@@ -54,6 +54,49 @@ public class MemberDAO {
 			SHA = null; 
 		}
 		return SHA;
+	}
+	
+	public int updateContents(MemberDTO param, String id) throws Exception {
+		
+		String sql = "update members set M_phone=?,m_zipcode=?,m_address1=?,m_address2=?,m_pw=? where M_EMAIL=?";
+		
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			
+			pstat.setString(1, param.getPhone());
+			pstat.setString(2, param.getZipCode());
+			pstat.setString(3, param.getAddress1());
+			pstat.setString(4, param.getAddress2());
+			pstat.setString(5, param.getPw());
+			pstat.setString(6, id);
+			
+			int result = pstat.executeUpdate();
+			
+			con.commit();
+			return result;
+			
+		}
+		
+	}
+
+	public int updateContentsForNaver(MemberDTO param) throws Exception {
+		
+		String sql = "update members set M_phone=?,m_zipcode=?,m_address1=?,m_address2=? where M_EMAIL=?";
+		
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			
+			pstat.setString(1, param.getPhone());
+			pstat.setString(2, param.getZipCode());
+			pstat.setString(3, param.getAddress1());
+			pstat.setString(4, param.getAddress2());
+			pstat.setString(5, param.getEmail());
+			
+			int result = pstat.executeUpdate();
+			
+			con.commit();
+			return result;
+			
+		}
+		
 	}
 
 
