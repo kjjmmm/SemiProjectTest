@@ -148,8 +148,6 @@
                 border: 3px solid #1ebdd850;
                 border-radius: 10px;
                 padding: 50px;
-
-
             }
             hr{
                 border-color: #1ebdd850;

@@ -204,7 +204,7 @@
         <hr id="top">
         <br><br><br>
 
-        <form action="myPageUpdate.members" method="post">
+        <form action="myPageUpdateForNaver.members" method="post">
 
             <div class="container wrap">
                 <h3>내 정보 관리</h3>
@@ -212,12 +212,12 @@
                 <hr  class="myhr1">
                 <div class="row">
                     <div class="col-2 d-md-block d-none"><span class="first">이메일</span></div>
-                    <div class="col-10 "><span class="second">kjjmmm123@naver.com</span></div>
+                    <div class="col-10 "><span class="second">${realcontents.email}${navercontents.email }</span></div>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-2 d-md-block d-none"><span class="first">이름</span></div>
-                    <div class="col-10"><span class="second">김지민</span></div>
+                    <div class="col-10"><span class="second">${realcontents.name }${navercontents.name }</span></div>
                 </div>
                 <hr>
                 <div class="row">
@@ -225,7 +225,7 @@
 
                     <div class="col-10"><span><span class="form-inline">
                         <div class="form-group">
-                            <input type="text" class="form-control mx-sm-3 second" name="phone" id="phone" required>
+                            <input type="text" class="form-control mx-sm-3 second" name="phone" id="phone" value="${realcontents.phone }" required>
                         </div>
                         </span></span></div>
                 </div>
@@ -234,7 +234,7 @@
                     <div class="col-2"><span class="first-pw first">주소</span></div>
                     <div class="col-10"><span><span class="form-inline">
                         <div class="form-group">
-                            <input type="text" id="zipcode" class="form-control mx-sm-3 second" readonly name="zipcode">
+                            <input type="text" id="zipcode" class="form-control mx-sm-3 second" readonly value="${realcontents.zipCode }" name="zipcode">
                             <button type="button" class="btn btn-info d-sm-block d-none" id="addressbt">찾기</button>
                         </div>
                         </span></span></div>
@@ -244,7 +244,7 @@
                     <div class="col-2"><span class="first-pw"></span></div>
                     <div class="col-10"><span><span class="form-inline">
                         <div class="form-group">
-                            <input type="text" id="address1" class="second form-control mx-sm-3" name="address1">
+                            <input type="text" id="address1" class="second form-control mx-sm-3" value="${realcontents.address1 }" name="address1">
                         </div>
                         </span></span></div>
                 </div>
@@ -254,7 +254,7 @@
                     <div class="col-2"><span class="first-pw first d-md-block d-none">상세 주소</span></div>
                     <div class="col-10"><span><span class="form-inline">
                         <div class="form-group">
-                            <input type="text" id="address2" class="second form-control mx-sm-3" name="address2">
+                            <input type="text" id="address2" class="second form-control mx-sm-3" value="${realcontents.address2 }" name="address2">
 
                         </div>
                         </span></span></div>

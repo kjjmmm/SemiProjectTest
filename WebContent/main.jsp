@@ -102,7 +102,9 @@ li {
 				<li class="nav-item"><a class="nav-link" href="textList.board?currentPage=1">후원 게시판</a></li>
 
 				<c:choose>
-					<c:when test="${sessionScope.loginEmail != null || navercontents.name != null}">
+					<c:when test="${sessionScope.loginEmail != null || navercontents.name != null || realcontents.email != null}">
+					<li class="nav-item"><a class="nav-link"
+							href="myPage.members">마이페이지</a></li>
 						<li class="nav-item"><a class="nav-link"
 							href="Logout.members">로그아웃</a></li>
 					</c:when>

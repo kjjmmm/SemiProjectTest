@@ -130,9 +130,11 @@ public class MembersController extends HttpServlet {
 				if (responseCode == 200) {
 					String ip = request.getRemoteAddr();
 					MemberDTO dto = dao.NaverContentsParse(res.toString(), ip);
+					
 					String email = dto.getEmail();
 					if (dao.isIdExist(dto)) {
-						request.getSession().setAttribute("navercontents", dto);
+						MemberDTO realcontents = dao.getContents(dto);
+						request.getSession().setAttribute("realcontents", realcontents);
 						request.getRequestDispatcher("main.jsp").forward(request, response);
 					} else {
 						dao.insertNaverMember(dto);
@@ -165,14 +167,16 @@ public class MembersController extends HttpServlet {
 			dto.setJoinDate(null);
 			dto.setAdmin(null);
 			
-			String email = dto.getEmail();
 			try {
 				
 				if (dao.isIdExist(dto)) {
-					request.getSession().setAttribute("navercontents", dto);
+					
+					MemberDTO realcontents = dao.getContents(dto);
+					request.getSession().setAttribute("realcontents", realcontents);
 					request.getRequestDispatcher("main.jsp").forward(request, response);
 					
 				} else {
+					
 					dao.insertNaverMember(dto);
 					request.getSession().setAttribute("navercontents", dto);
 					request.getRequestDispatcher("main.jsp").forward(request, response);
@@ -190,6 +194,7 @@ public class MembersController extends HttpServlet {
 			String zipcode = request.getParameter("zipcode");
 			String add1 = request.getParameter("address1");
 			String add2 = request.getParameter("address2");
+			String email = (String)request.getSession().getAttribute("loginEmail");
 			
 			MemberDTO dto = new MemberDTO();
 			
@@ -198,7 +203,106 @@ public class MembersController extends HttpServlet {
 			dto.setZipCode(zipcode);
 			dto.setAddress1(add1);
 			dto.setAddress2(add2);
+			dto.setEmail(email);
 			
+			try {
+				int result = dao.updateContents(dto);
+				request.getSession().setAttribute("result", result);
+				request.getRequestDispatcher("myPageUpdateView.jsp").forward(request, response);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				response.sendRedirect("error.html");
+			}
+
+			
+		}else if(cmd.equals("/myPageUpdateForNaver.members")) {
+			
+			String phone = request.getParameter("phone");
+			String zipcode = request.getParameter("zipcode");
+			String add1 = request.getParameter("address1");
+			String add2 = request.getParameter("address2");
+
+			MemberDTO contents = (MemberDTO)request.getSession().getAttribute("navercontents");
+			MemberDTO aftercontents = (MemberDTO)request.getSession().getAttribute("realcontents");
+			
+
+			if(contents==null) {
+				String naverandkakaoEmail = aftercontents.getEmail();
+				
+				MemberDTO dto = new MemberDTO();
+				
+				dto.setPhone(phone);
+				dto.setZipCode(zipcode);
+				dto.setAddress1(add1);
+				dto.setAddress2(add2);
+				dto.setEmail(naverandkakaoEmail);
+
+				try {
+					int result = dao.updateContentsForNaver(dto);
+					request.getSession().setAttribute("result", result);
+					request.getRequestDispatcher("myPageUpdateView.jsp").forward(request, response);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+					response.sendRedirect("error.html");
+				}
+			}else {
+				String naverandkakaoEmail = contents.getEmail();
+
+				System.out.println(naverandkakaoEmail);
+				
+				MemberDTO dto = new MemberDTO();
+				
+				dto.setPhone(phone);
+				dto.setZipCode(zipcode);
+				dto.setAddress1(add1);
+				dto.setAddress2(add2);
+				dto.setEmail(naverandkakaoEmail);
+
+				try {
+					int result = dao.updateContentsForNaver(dto);
+					request.getSession().setAttribute("result", result);
+					request.getRequestDispatcher("myPageUpdateView.jsp").forward(request, response);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+					response.sendRedirect("error.html");
+				}
+			}
+
+		}else if(cmd.equals("/myPageUpdateComplete.members")) {
+			
+			request.getSession().invalidate();
+			request.getRequestDispatcher("main.jsp").forward(request, response);
+			
+		}else if(cmd.equals("/myPage.members")) {
+			
+			request.getRequestDispatcher("myPage.jsp").forward(request, response);
+			
+			String email = (String)request.getSession().getAttribute("loginEmail");
+			MemberDTO realcontents = (MemberDTO)request.getSession().getAttribute("realcontents");
+			MemberDTO navercontents = (MemberDTO)request.getSession().getAttribute("navercontents");
+			
+			System.out.println(email);
+			System.out.println(realcontents);
+			System.out.println(navercontents);
+			
+			if(email==null) {
+				
+				request.getRequestDispatcher("myPage.jsp");
+				
+			}else {
+				
+				try {
+					MemberDTO dto = dao.getContents(email);
+					request.getSession().setAttribute("dto",dto);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+			}
 			
 			
 		}

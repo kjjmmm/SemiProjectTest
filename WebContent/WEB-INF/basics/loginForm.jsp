@@ -208,7 +208,6 @@ li {
     Kakao.Auth.createLoginButton({
       container: '#kakao-login-btn',
       success: function(authObj) {
-          alert(JSON.stringify(authObj));
 
           Kakao.API.request({
               url: '/v1/user/me',
